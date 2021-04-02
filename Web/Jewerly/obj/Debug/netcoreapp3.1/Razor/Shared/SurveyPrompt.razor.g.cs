@@ -72,13 +72,6 @@ using Jewerly.Shared;
 #line default
 #line hidden
 #nullable disable
-#nullable restore
-#line 10 "D:\visual studio\Jewerly\_Imports.razor"
-using BlazorStrap;
-
-#line default
-#line hidden
-#nullable disable
     public partial class SurveyPrompt : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998

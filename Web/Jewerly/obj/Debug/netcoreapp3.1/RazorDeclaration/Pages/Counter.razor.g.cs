@@ -76,13 +76,6 @@ using Jewerly.Shared;
 #line default
 #line hidden
 #nullable disable
-#nullable restore
-#line 10 "D:\visual studio\Jewerly\_Imports.razor"
-using BlazorStrap;
-
-#line default
-#line hidden
-#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/counter")]
     public partial class Counter : Microsoft.AspNetCore.Components.ComponentBase
     {
