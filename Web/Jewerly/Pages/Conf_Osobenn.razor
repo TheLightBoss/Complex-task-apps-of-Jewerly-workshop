@@ -1,0 +1,137 @@
+﻿@page "/conf_osobenn"
+@inject IzdelieSprService Service
+@inject NavigationManager NavigationManager
+
+<MudContainer Class="mt-16">
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Конфигуратор изделий</MudText>
+    <MudText Typo="Typo.h5" Align="Align.Center">Выберите @nameTip</MudText>
+    <MudGrid Class="mt-8">
+        <MudItem xs="12" sm="6" md="4">
+            <MudCard Elevation="25" Class="rounded-lg pb-4">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h5" Align="Align.Center">@need[0].NameItm</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent>
+                    <div class="d-flex justify-center">
+                        <img class="mud-elevation-4" src="@need[0].UrlPic" width="230" height="200" alt="spec1" />
+                    </div>
+                    
+                </MudCardContent>
+                <MudCardActions Class="d-flex justify-center">
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="OpenCol" Size="Size.Large" Style="width:50%;">Выбрать</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudCard Elevation="25" Class="rounded-lg pb-4">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h5" Align="Align.Center">@need[1].NameItm</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent>
+                    <div class="d-flex justify-center">
+                        <img class="mud-elevation-4" src="@need[1].UrlPic" width="230" height="200" alt="spec2" />
+                    </div>
+                    
+                </MudCardContent>
+                <MudCardActions Class="d-flex justify-center">
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="OpenCam" Size="Size.Large" Style="width:50%;">Выбрать</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="4">
+            <MudCard Elevation="25" Class="rounded-lg pb-4">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h5" Align="Align.Center">@need[2].NameItm</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent>
+                    <div class="d-flex justify-center">
+                        <img class="mud-elevation-4" src="@need[2].UrlPic" width="230" height="200" alt="spec3" />
+                    </div>
+
+                    
+                </MudCardContent>
+                <MudCardActions Class="d-flex justify-center">
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="OpenCep" Size="Size.Large" Style="width:50%;">Выбрать</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+
+    </MudGrid>
+</MudContainer>
+
+<MudThemeProvider Theme="MyCustomTheme" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+@code {
+    MudTheme MyCustomTheme = new MudTheme()
+    {
+        Palette = new Palette()
+        {
+            Primary = Colors.Grey.Darken4,
+            //Error = Colors.Blue.Darken1,
+            Dark = Colors.Shades.White,
+        },
+
+        LayoutProperties = new LayoutProperties()
+        {
+            DrawerWidthLeft = "260px",
+            DrawerWidthRight = "300px"
+        }
+    }; //цвета
+
+
+    string spec1, spec2, spec3, nameTip;
+    public IList<IzdelieSpr> izdelies = Conf_tipizd.izdelies;
+    public IList<IzdelieSpr> need = new List<IzdelieSpr>();
+    public static IzdelieSpr selectedIzd;
+    
+    protected override void OnInitialized()
+    {
+        
+        if (Conf_tipizd.selectedTip == 1)
+        {
+            nameTip = "гравировку для кольца";
+        }
+        if (Conf_tipizd.selectedTip == 2)
+        {
+            nameTip = "камень для кольца";
+        }
+        if (Conf_tipizd.selectedTip == 3)
+        {
+            nameTip = "плетение цепочки";
+        }
+        foreach (var i in izdelies)
+        {
+            if (i.IdTipIzd == Conf_tipizd.selectedTip && i.IdMaterial == Configurator_page.result)
+            {
+                need.Add(i);
+            }
+        }
+        spec1 = need[0].UrlPic;
+        spec2 = need[1].UrlPic;
+        spec3 = need[2].UrlPic;//ДОБАВИТЬ ДО КОНЦА ВСЕ ИЗДЕЛИЯ
+    }
+    private void OpenCol()
+    {
+        selectedIzd = need[0];
+        NavigationManager.NavigateTo("final_zakaz");
+    }
+    private void OpenCam()
+    {
+        selectedIzd = need[1];
+        NavigationManager.NavigateTo("final_zakaz");
+    }
+    private void OpenCep()
+    {
+        selectedIzd = need[2];
+        NavigationManager.NavigateTo("final_zakaz");
+    }
+}

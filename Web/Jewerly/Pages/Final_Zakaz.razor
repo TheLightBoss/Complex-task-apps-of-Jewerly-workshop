@@ -1,0 +1,74 @@
+﻿@page "/final_zakaz"
+@inject IzdelieService Service
+
+
+
+<MudContainer Class="mt-16">
+    <MudGrid Class="mt-8">
+        <MudItem>
+            <MudCard Elevation="25">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h5" Align="Align.Center">Ваше изделие</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent>
+                    <div>
+                        <img width="490" height="400" src="@spr.UrlPic" alt="Изделие" />
+                    </div>
+                    <br />
+                    <MudSelect T="double" @bind-Value="@selectedVal" Label="Размер" Strict="true" Variant="Variant.Filled" Format="F2">
+                        @for (double i = 15; i <= 20; i += 0.5)
+                        {
+                            <MudSelectItem T="double" Value="@i" />
+                        }
+
+                    </MudSelect>
+                </MudCardContent>
+                <MudCardActions Class="d-flex justify-center">
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;">Заказать</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+        <MudItem>
+            <MudCard Elevation="25">
+
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+
+
+<MudThemeProvider Theme="MyCustomTheme" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+@code {
+
+    MudTheme MyCustomTheme = new MudTheme()
+    {
+        Palette = new Palette()
+        {
+            Primary = Colors.Grey.Darken4,
+            //Error = Colors.Blue.Darken1,
+            Dark = Colors.Shades.White,
+        },
+
+        LayoutProperties = new LayoutProperties()
+        {
+            DrawerWidthLeft = "260px",
+            DrawerWidthRight = "300px"
+        }
+    }; //цвета
+    public IzdelieSpr spr = Conf_Osobenn.selectedIzd;
+    double selectedVal; //выбранный размер
+    public Izdelie izdel = new Izdelie();
+    private void Price_shet()
+    {
+        //izdel.Razmer = selectedVal; //он выбирает размер и сразу справа появляет цена посчитанныая и возможность нажать на заказ
+        
+        
+    }
+
+
+}
