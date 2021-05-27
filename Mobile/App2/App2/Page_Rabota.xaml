@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App2.Page_Rabota">
+    
+    <ContentPage.Content>
+        <StackLayout>
+
+            <StackLayout Orientation="Horizontal" Padding="20,10,10,10">
+
+                <CheckBox x:Name="chbox1" CheckedChanged="chbox1_CheckedChanged"/>
+                <Label x:Name="label1" FontSize="Medium" Text="сделать форму кольца" />
+
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" Padding="20,10,10,10">
+
+                <CheckBox x:Name="chbox2" CheckedChanged="chbox2_CheckedChanged"/>
+                <Label x:Name="label2" FontSize="Medium" Text="сделать алмазную гравировку" />
+
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" Padding="20,10,10,10">
+
+                <CheckBox x:Name="chbox3" CheckedChanged="chbox3_CheckedChanged"/>
+                <Label x:Name="label3" FontSize="Medium"  Text="шлифовка изделия"/>
+
+            </StackLayout>
+            
+            <StackLayout Orientation="Horizontal" Padding="20,10,10,10">
+                <CheckBox x:Name="chbox4" CheckedChanged="chbox4_CheckedChanged" />
+                <Label x:Name="label4" FontSize="Medium" Text="ещё что-то"/>
+            </StackLayout>
+
+            <Image x:Name="image"/>
+            <Button Text="Изделие выполнено" Clicked="Button_Clicked" HorizontalOptions="CenterAndExpand"/>
+            
+        </StackLayout>
+
+
+    </ContentPage.Content>
+</ContentPage>
