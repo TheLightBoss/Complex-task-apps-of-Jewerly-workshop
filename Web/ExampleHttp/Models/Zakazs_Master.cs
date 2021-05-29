@@ -9,6 +9,7 @@ namespace ExampleHttp.Models
     {
         public int Id_izd { get; set; }
         public string Name_izd { get; set; }
+        public double Razmer { get; set; }
         public string[] Spisok_rabot { get; set; }
         public bool Status { get; set; }
         public bool Polu_status { get; set; }

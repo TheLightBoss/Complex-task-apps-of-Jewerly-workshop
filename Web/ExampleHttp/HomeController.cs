@@ -19,84 +19,87 @@ namespace ExampleHttp
         {
             return View();
         }
-        public string Ky()
+        public string UpdateMaster(string s)
         {
-            using (connection = new NpgsqlConnection(conn))
+            try
             {
-                try
+                Sotrudnik sotrud = new Sotrudnik();
+                Masters masters = JsonConvert.DeserializeObject<Masters>(s);
+                jewerlyContext context;
+                using (context = new jewerlyContext())
                 {
-                    //Sotrudnik sotrudnik = JsonConvert.DeserializeObject<Sotrudnik>(s);
-                    connection.Open();
-                    string cmd = "SELECT * FROM sotrudnik";
-                    NpgsqlCommand command = new NpgsqlCommand(cmd, connection);
-                    NpgsqlDataReader dataReader = command.ExecuteReader();
-                    Masters master = new Masters();
-                    while (dataReader.Read())
+                    var dat = from st in context.Sotrudniks
+                              where st.IdSotr == masters.IdMaster
+                              select st;
+                    foreach(Sotrudnik sotrudnik in dat)
                     {
-                        master = new Masters()
-                            {
-                                Fio = (string)dataReader["fio"],
-                                Address = (string)dataReader["address"],
-                                IdMaster = (int)dataReader["id_sotr"],
-                                Login = (string)dataReader["login"],
-                                Passport = (string)dataReader["passport"],
-                                Password = (string)dataReader["password"],
-                                Stag = (short)dataReader["stag"]
-                            };
-                        
+                        sotrudnik.Address = masters.Address;
+                        sotrudnik.Fio = masters.Fio;
+                        sotrudnik.Login = masters.Login;
+                        sotrudnik.Passport = masters.Passport;
+                        sotrudnik.Password = masters.Password;
                     }
-                    connection.Close();
-                    string result = JsonConvert.SerializeObject(master);
-                    return result;
+                    try
+                    {
+                        context.SaveChanges();
+                    }
+                    catch(Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        return "ошибка";
+                    } 
                 }
-                catch
-                {
-                    return "Ошибка!";
-                }
+
+                string result = JsonConvert.SerializeObject(masters);
+                return result;
             }
-        }
-        
+            catch
+            {
+                return "ошибка";
+            }
+        } //изменение данных сотрудника 
         public string GetMaster(string s)
         {
-            
-
             using (connection = new NpgsqlConnection(conn))
             {
-                try
-                {
-                    Masters mast = JsonConvert.DeserializeObject<Masters>(s);
-                    //Sotrudnik sotrudnik = JsonConvert.DeserializeObject<Sotrudnik>(s);
-                    connection.Open();
-                    string cmd = "SELECT * FROM sotrudnik";
-                    NpgsqlCommand command = new NpgsqlCommand(cmd, connection);
-                    NpgsqlDataReader dataReader = command.ExecuteReader();
-                    Masters master = new Masters();
-                    while (dataReader.Read())
+                
+                    try
                     {
-                        if(mast.Login == (string)dataReader["login"] && mast.Password == (string)dataReader["password"])
+                        Masters mast = JsonConvert.DeserializeObject<Masters>(s);
+                        connection.Open();
+                        string cmd = "SELECT * FROM sotrudnik";
+                        NpgsqlCommand command = new NpgsqlCommand(cmd, connection);
+                        NpgsqlDataReader dataReader = command.ExecuteReader();
+                        
+                        Masters master = new Masters();
+                        while (dataReader.Read())
                         {
-                            master = new Masters()
+                            if(mast.Login == (string)dataReader["login"] && mast.Password == (string)dataReader["password"])
                             {
-                                Fio = (string)dataReader["fio"],
-                                Address = (string)dataReader["address"],
-                                IdMaster = (int)dataReader["id_sotr"],
-                                Login = (string)dataReader["login"],
-                                Passport = (string)dataReader["passport"],
-                                Password = (string)dataReader["password"],
-                                Stag = (short)dataReader["stag"]
-                            };
+                                master = new Masters()
+                                {
+                                    Fio = (string)dataReader["fio"],
+                                    Address = (string)dataReader["address"],
+                                    IdMaster = (int)dataReader["id_sotr"],
+                                    Login = (string)dataReader["login"],
+                                    Passport = (string)dataReader["passport"],
+                                    Password = (string)dataReader["password"],
+                                    Stag = (short)dataReader["stag"]
+                                };
+                            }
                         }
+                        connection.Close();
+                        string result = JsonConvert.SerializeObject(master);
+                        return result;
                     }
-                    connection.Close();
-                    string result = JsonConvert.SerializeObject(master);
-                    return result;
-                }
-                catch
-                {
-                    return "Ошибка!";
-                }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        return "ошибка";
+                    }
+                
             }
-        }
+        } //поиск и отправка мастера 
         public string GetZakazs(string id_mast)
         {
             using (connection = new NpgsqlConnection(conn))
@@ -104,7 +107,7 @@ namespace ExampleHttp
                 try
                 {
                     connection.Open();
-                    string cmd = "CALL zakazs_master("+id_mast+");";
+                    string cmd = "SELECT * FROM zakazsmasters WHERE id_sotr = "+id_mast+";";
                     NpgsqlCommand command = new NpgsqlCommand(cmd, connection);
                     NpgsqlDataReader dataReader = command.ExecuteReader();
                     List<Zakazs_Master> zakazs = new List<Zakazs_Master>();//отправим
@@ -112,29 +115,82 @@ namespace ExampleHttp
                     {
                         zakazs.Add(new Zakazs_Master()
                         {
-                            date_start = (DateTime)dataReader["izgotovlenie.data_start"],
-                            Id_izd = (int)dataReader["izdelie.id_izd"],
-                            Name_izd = (string)dataReader["izdelie_spr.name_izd"],
-                            Polu_status = (bool)dataReader["izgotovlenie.polu_status"],
-                            Spisok_rabot = (string[])dataReader["rabota.spisok_rabot"],
-                            Status = (bool)dataReader["izgotovlenie.status"],
-                            Vipoln_rabot = (string[])dataReader["izgotovlenie.list_done_job"],
-                            Url_pic = (string)dataReader["izdelie_spr.url_pic "]
+                            date_start = (DateTime)dataReader["data_start"],
+                            Id_izd = (int)dataReader["id_izd"],
+                            Razmer = (double)dataReader["razmer"],
+                            Name_izd = (string)dataReader["name_izd"],
+                            Polu_status = (bool)dataReader["polu_status"],
+                            Spisok_rabot = (string[])dataReader["spisok_rabot"],
+                            Vipoln_rabot = (string[])dataReader["list_done_job"],
+                            Status = (bool)dataReader["status"],
+                            Url_pic = (string)dataReader["url_pic"]
                         });
                     }
                     connection.Close();
-
-
                     return JsonConvert.SerializeObject(zakazs);
                 }
-                catch
+                catch (Exception ex)
                 {
-                    return "Ошибка!";
+                    Console.WriteLine(ex.Message);
+                    return "";
                 }
             }
-        } // отправка заказов у мастера
-
-
+        } // отправка заказов у мастера  
+        public string ZakazCompleted(string s) 
+        {
+            int id = Convert.ToInt32(s);
+            jewerlyContext context;
+            using (context = new jewerlyContext())
+            {
+                var dat = from st in context.Izgotovlenies
+                          where st.IdIzd == id
+                          select st;
+                foreach (var izgotovlenie in dat)
+                {
+                    izgotovlenie.DataEnd = DateTime.Now;
+                    izgotovlenie.Status = true;
+                }               
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return "-1";
+                }
+            }
+            return "0";
+        } // заказ выполнен 
+        public string ZakazHalfCompleted(string s)
+        {
+            Zakazs_Master zakazs_ = JsonConvert.DeserializeObject<Zakazs_Master>(s);
+            jewerlyContext context;
+            using (context = new jewerlyContext())
+            {
+                var dat = from st in context.Izgotovlenies
+                          where st.IdIzd == zakazs_.Id_izd
+                          select st;
+                foreach (var izgotovlenie in dat)
+                {
+                    izgotovlenie.ListDoneJob[0] = zakazs_.Vipoln_rabot[0];
+                    izgotovlenie.ListDoneJob[1] = zakazs_.Vipoln_rabot[1];
+                    izgotovlenie.ListDoneJob[2] = zakazs_.Vipoln_rabot[2];
+                    izgotovlenie.ListDoneJob[3] = zakazs_.Vipoln_rabot[3];
+                    izgotovlenie.PoluStatus = true;
+                }
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return "-1";// ошибка
+                }
+            }
+            return "0"; //успешно 
+        } // заказ выполнен наполовину 
 
     }
 }
