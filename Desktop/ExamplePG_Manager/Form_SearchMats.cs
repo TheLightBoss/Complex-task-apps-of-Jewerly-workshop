@@ -48,7 +48,7 @@ namespace ExamplePG_Manager
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ошибка", ex.Message, MessageBoxButtons.OK);
+                    MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -88,7 +88,7 @@ namespace ExamplePG_Manager
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ошибка", ex.Message, MessageBoxButtons.OK);
+                    MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

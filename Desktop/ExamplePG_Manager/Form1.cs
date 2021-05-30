@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Net.Http;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Npgsql;
 using ExamplePG_Manager.Models;
+using ExamplePG_Manager.View;
+using Newtonsoft.Json;
 
 namespace ExamplePG_Manager
 {
@@ -17,6 +20,7 @@ namespace ExamplePG_Manager
     {
         string connectionStr = "Server=localhost; Port=5432; Database=jewerly; User Id=postgres; Password=saak2108;";
         NpgsqlConnection connection;
+        String url = "https://b3f48d32d3a6.ngrok.io/Home/";
 
         DataRow[] dataRow; // (работаем через это) 
         DataTable dataTable; // данные таблицы Izdeli_Spr
@@ -24,8 +28,14 @@ namespace ExamplePG_Manager
         DataTable dataTable_tip_izd;
         DataTable dataTable_mats;
         int numSelectedIzd = 0;
+        int numSelectedSotr = 0;
         List<int> id_izd = new List<int>();
 
+        List<ZakazNew> zakazs_sNew = new List<ZakazNew>();// новые, которые нужно распределить
+        List<ZakazGotov> zakazs_sGotov = new List<ZakazGotov>();// готовые заказы
+        List<ZakazInProc> zakazs_sInProc = new List<ZakazInProc>();//заказы, которые выполняются
+
+        public static List<Masters> masters1 = new List<Masters>();
         List<Mats> mats = new List<Mats>();
         List<Bank> banks = new List<Bank>();
 
@@ -38,8 +48,151 @@ namespace ExamplePG_Manager
             // TODO: данная строка кода позволяет загрузить данные в таблицу "jewerlyDataSet.izdelie_spr". При необходимости она может быть перемещена или удалена.
             //this.izdelie_sprTableAdapter.Fill(this.jewerlyDataSet.izdelie_spr);
             Fill();
+            Fill_Masters();
+            Fill_ZakazNew();
+            radioButton_newZakaz_CheckedChanged(sender, e);
+            Fill_ZakazInProc();
+            Fill_ZakazGotov();
         }
+        void Fill_ZakazGotov()
+        {
 
+            using (connection = new NpgsqlConnection(connectionStr))
+            {
+                try
+                {
+                    connection.Open();
+                    string cmd = "SELECT * FROM zakazsgotov";
+                    NpgsqlCommand command = new NpgsqlCommand(cmd, connection);
+                    NpgsqlDataReader dataReader = command.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        zakazs_sGotov.Add(new ZakazGotov()
+                        {
+                            Date_zak = (DateTime)dataReader["date_zak"],
+                            Id_izd = (int)dataReader["id_izd"],
+                            Name_izd = (string)dataReader["name_izd"],
+                            Phone = (string)dataReader["PhoneNumber"],
+                            Price_izd = Convert.ToDouble(dataReader["price_izd"]),
+                            UserName = (string)dataReader["UserName"]
+                        });
+
+                    }
+                    connection.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }// готовые
+        void Fill_ZakazNew()
+        {
+
+            using (connection = new NpgsqlConnection(connectionStr))
+            {
+                try
+                {
+                    connection.Open();
+                    string cmd = "SELECT * FROM zakazsnew";
+                    NpgsqlCommand command = new NpgsqlCommand(cmd, connection);
+                    NpgsqlDataReader dataReader = command.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        zakazs_sNew.Add(new ZakazNew()
+                        {
+                            Date_zak = (DateTime)dataReader["date_zak"],
+                            Id_izd = (int)dataReader["id_izd"],
+                            Name_izd = (string)dataReader["name_izd"],
+                            Phone = (string)dataReader["PhoneNumber"],
+                            Price_izd = Convert.ToDouble(dataReader["price_izd"]),
+                            UserName = (string)dataReader["UserName"]
+                        });
+
+                    }
+                    connection.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                } 
+            }
+        }// новые, которые нужно распределить
+        void Fill_ZakazInProc()
+        {
+
+            using (connection = new NpgsqlConnection(connectionStr))
+            {
+                try
+                {
+                    connection.Open();
+                    string cmd = "SELECT * FROM zakazsinproc";
+                    NpgsqlCommand command = new NpgsqlCommand(cmd, connection);
+                    NpgsqlDataReader dataReader = command.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        zakazs_sInProc.Add(new ZakazInProc()
+                        {
+                            Date_zak = (DateTime)dataReader["date_zak"],
+                            Id_izd = (int)dataReader["id_izd"],
+                            Name_izd = (string)dataReader["name_izd"],
+                            Phone = (string)dataReader["PhoneNumber"],
+                            Price_izd = Convert.ToDouble(dataReader["price_izd"]),
+                            UserName = (string)dataReader["UserName"],
+                            Polu_Status = (bool)dataReader["polu_status"]
+                        });
+
+                    }
+                    connection.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                } 
+            }
+        } //заказы, которые выполняются
+        void Fill_Masters()
+        {
+            using (connection = new NpgsqlConnection(connectionStr))
+            {
+                try
+                {
+                    connection.Open();
+                    string cmd = "SELECT * FROM sotrudnik";
+                    masters1 = new List<Masters>();
+                    NpgsqlCommand command = new NpgsqlCommand(cmd, connection);
+                    NpgsqlDataReader dataReader = command.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        masters1.Add(new Masters()
+                        {
+                            Address = (string)dataReader["address"],
+                            Fio = (string)dataReader["fio"],
+                            IdMaster = (int)dataReader["id_sotr"],
+                            Login = (string)dataReader["login"],
+                            Passport = (string)dataReader["passport"],
+                            Password = (string)dataReader["password"],
+                            Stag = (short)dataReader["stag"]
+                        });
+
+                    }
+                    connection.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                } // подгрузка сотрудников
+            }
+            Fill_Master();
+        } // подгружаем сотрудников
+        void Fill_Master()
+        {
+            textBox_address.Text = masters1[numSelectedSotr].Address;
+            textBox_fio.Text = masters1[numSelectedSotr].Fio;
+            textBox_login.Text = masters1[numSelectedSotr].Login;
+            textBox_password.Text = masters1[numSelectedSotr].Password;
+            numericUpDown_Stag.Value = masters1[numSelectedSotr].Stag;
+        }
         void Fill()
         {
             using (connection = new NpgsqlConnection(connectionStr))
@@ -66,7 +219,7 @@ namespace ExamplePG_Manager
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ошибка", ex.Message, MessageBoxButtons.OK);
+                    MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 } // подгрузка таблицы с материалами
                 try
                 {
@@ -116,24 +269,53 @@ namespace ExamplePG_Manager
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ошибка" + ex.Message, ex.Message, MessageBoxButtons.OK);
+                    MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 } // подгрузка изделий 
             }
         }
         private void radioButton_newZakaz_CheckedChanged(object sender, EventArgs e)
         {
-            //Form_Masters form_Masters = new Form_Masters();
-            //form_Masters.Show();
+            dgv_ZakazMain.Rows.Clear();
+            foreach (var i in zakazs_sNew)
+            {
+                int k = dgv_ZakazMain.Rows.Add();
+                dgv_ZakazMain.Rows[k].Cells[0].Value = i.Id_izd;
+                dgv_ZakazMain.Rows[k].Cells[1].Value = i.Date_zak.ToShortDateString();
+                dgv_ZakazMain.Rows[k].Cells[2].Value = i.Name_izd;
+                dgv_ZakazMain.Rows[k].Cells[3].Value = i.UserName;
+                dgv_ZakazMain.Rows[k].Cells[4].Value = i.Phone;
+                dgv_ZakazMain.Rows[k].Cells[5].Value = i.Price_izd;
+            }
         } //подгружает новые заказы
 
         private void radioButton_loadZakaz_CheckedChanged(object sender, EventArgs e)
         {
-
+            dgv_ZakazMain.Rows.Clear();
+            foreach (var i in zakazs_sInProc)
+            {
+                int k = dgv_ZakazMain.Rows.Add(); 
+                dgv_ZakazMain.Rows[k].Cells[0].Value = i.Id_izd;
+                dgv_ZakazMain.Rows[k].Cells[1].Value = i.Date_zak.ToShortDateString();
+                dgv_ZakazMain.Rows[k].Cells[2].Value = i.Name_izd;
+                dgv_ZakazMain.Rows[k].Cells[3].Value = i.UserName;
+                dgv_ZakazMain.Rows[k].Cells[4].Value = i.Phone;
+                dgv_ZakazMain.Rows[k].Cells[5].Value = i.Price_izd;
+            }
         } //подгружает выполняющиеся заказы
 
         private void radioButton_readyZakaz_CheckedChanged(object sender, EventArgs e)
         {
-
+            dgv_ZakazMain.Rows.Clear();
+            foreach(var i in zakazs_sGotov)
+            {
+                int k = dgv_ZakazMain.Rows.Add();
+                dgv_ZakazMain.Rows[k].Cells[0].Value = i.Id_izd;
+                dgv_ZakazMain.Rows[k].Cells[1].Value = i.Date_zak.ToShortDateString();
+                dgv_ZakazMain.Rows[k].Cells[2].Value = i.Name_izd;
+                dgv_ZakazMain.Rows[k].Cells[3].Value = i.UserName;
+                dgv_ZakazMain.Rows[k].Cells[4].Value = i.Phone;
+                dgv_ZakazMain.Rows[k].Cells[5].Value = i.Price_izd;
+            }
         } //подгружает выполненные заказы, которые нужно подготовить к доставке
 
         private void btn_Add_Click(object sender, EventArgs e)
@@ -215,22 +397,16 @@ namespace ExamplePG_Manager
 
         private void dqv_ZakazMain_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            Form_Masters masters = new Form_Masters();
-            string index = dqv_ZakazMain.SelectedRows[0].Cells[0].Value.ToString();// с помощью этого свойства проходимся по всем ячейкам в выбранной строке 
-            // в данном случае берём первую ячейку
-            for(int i=0; i<5; i++)
+            if (radioButton_newZakaz.Checked)
             {
-                //ну тут крч пройдёмся по всем если надо, либо выберем одну крч придумаем как получить чисто id заказа и отправим его в след форму,
-                //или как написал в класс Form_Masters.cs будем передовать ссылку на объект класса,
-                //хотя это залупка немного так как проще id передать да и процедуру там вызвать которая вставит всё
-                //подумаем крч, главное щас понял как получать данные со строки на которую кликнул 
-                //если что этот метод проверил уже на таблице с материалами 
-                //удаляй пояснительные комменты такого рода как этот, те которые к определённым строчкам кода оставляй,
-                //всё-таки хочу сохранить эти комменты так как потом если надо будет че то юзать то с комментами всё проще вспомнить
+                string index = dgv_ZakazMain.SelectedRows[0].Cells[0].Value.ToString();// с помощью этого свойства получаем id_izd в выбранной строке 
+                Form_Masters masters = new Form_Masters(index);
+                Hide();
+                masters.ShowDialog();
+                radioButton_newZakaz_CheckedChanged(sender, e);
+                Show();
             }
-            Hide();
-            masters.ShowDialog();
-            Show();
+
         } // выбираем нужный заказ и переходим на форму выбора мастера
 
         private void textBox_nameIzd_Click(object sender, EventArgs e)
@@ -239,6 +415,113 @@ namespace ExamplePG_Manager
             formURL.ShowDialog();
             textBox_nameIzd.Text = formURL.text;
             formURL.Close();
+        } // окно для изменения больших текстов
+
+        private void button_upmaster_Click(object sender, EventArgs e)
+        {
+            if (numSelectedSotr + 1 < masters1.Count)
+            {
+                numSelectedSotr++;
+                Fill_Master();
+            }
+            else
+            {
+                MessageBox.Show("Это последний сотрудник.", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
+        private void button_downmaster_Click(object sender, EventArgs e)
+        {
+            if (numSelectedSotr - 1 >= 0)
+            {
+                numSelectedSotr--;
+                Fill_Master();
+            }
+            else
+            {
+                MessageBox.Show("Это первый сотрудник.", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        } // для прохода по сотрудникам
+
+        private async void button_savemaster_Click(object sender, EventArgs e)
+        {
+            HttpClient client = new HttpClient();
+
+            Masters m = new Masters()
+            {
+                Address = textBox_address.Text,
+                Fio = textBox_fio.Text,
+                IdMaster = masters1[numSelectedSotr].IdMaster,
+                Login = textBox_login.Text,
+                Passport = textBox_password.Text,
+                Password = textBox_password.Text,
+                Stag = (short)numericUpDown_Stag.Value
+            };
+
+            string ss = JsonConvert.SerializeObject(m);
+            Dictionary<string, string> dict = new Dictionary<string, string>()
+                {
+                    {"s", ss }// название переменной в контроллере сервера и второе то что посылаем туда
+                };
+
+            FormUrlEncodedContent form = new FormUrlEncodedContent(dict);
+            HttpResponseMessage responseMessage = await client.PostAsync(url + "UpdateMaster", form);
+            
+            string result = await responseMessage.Content.ReadAsStringAsync();
+            try
+            {
+                masters1[numSelectedSotr] = JsonConvert.DeserializeObject<Masters>(result);
+                Fill_Master();
+                MessageBox.Show("Данные успешно изменены.", "Выполнено", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //внести изменения 
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        } // сохраняем изменения данных у сотрудника
+
+        private void button_addmaster_Click(object sender, EventArgs e)
+        {
+
+        } //добавляем нового сотрудника
+
+
+
+
+
+
+        // с помщью методов ниже изменяем размеры окна для удобной работы
+        private void tabPage_izdSpr_Enter(object sender, EventArgs e)
+        {
+            Size = new System.Drawing.Size(1021, 679);
+            tabControl1.Size = new System.Drawing.Size(961, 571);
+            tabControl_Main.Size = new System.Drawing.Size(981, 616);
+            tabPage_izdSpr.Size = new System.Drawing.Size(953, 538);
+        }  // страница с изделиями
+
+        private void tabPage_sotrudnik_Enter(object sender, EventArgs e)
+        {
+            Size = new System.Drawing.Size(495, 610);
+            tabControl_Main.Size = new System.Drawing.Size(462, 549);
+        } //страница с сотрудниками
+
+        private void tabPage_Zakazs_Enter(object sender, EventArgs e)
+        {
+            Size = new System.Drawing.Size(1021, 679);
+            tabControl_Main.Size = new System.Drawing.Size(981, 616);
+        }// главная форма для заказов
+
+        private void tabPage2_Enter_1(object sender, EventArgs e)
+        {
+            Size = new System.Drawing.Size(743, 503);
+            tabControl1.Size = new System.Drawing.Size(682, 380);
+            tabControl_Main.Size = new System.Drawing.Size(706, 441);
+        }// страница с материалами
+
+        private void tabPage_DataMain_Enter(object sender, EventArgs e)
+        {
+            tabPage2_Enter_1(sender, e);
+        } // для страницы с материалами
+
     }
 }

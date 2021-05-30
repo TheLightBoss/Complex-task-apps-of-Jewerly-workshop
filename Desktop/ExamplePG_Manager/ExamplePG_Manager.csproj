@@ -36,6 +36,9 @@
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Npgsql, Version=5.0.4.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <HintPath>packages\Npgsql.5.0.4\lib\netstandard2.0\Npgsql.dll</HintPath>
     </Reference>
@@ -116,10 +119,16 @@
       <DependentUpon>jewerlyDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Models\Bank.cs" />
+    <Compile Include="Models\ID_Master_Izd.cs" />
+    <Compile Include="Models\Masters.cs" />
     <Compile Include="Models\Mats.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\Mats_Bank.cs" />
+    <Compile Include="View\ZakazGotov.cs" />
+    <Compile Include="View\ZakazInProc.cs" />
+    <Compile Include="View\ZakazNew.cs" />
+    <Compile Include="View\Zakazs_Master.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

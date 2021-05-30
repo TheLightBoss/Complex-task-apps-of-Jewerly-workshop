@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\visual studio\\Веб-приложение\\Blazor Приложения\\ExampleHttp\\ExampleHttp.csproj": {}
+    "D:\\visual studio\\Complex-task-apps-of-Jewerly-workshop\\Web\\ExampleHttp\\ExampleHttp.csproj": {}
   },
   "projects": {
-    "D:\\visual studio\\Веб-приложение\\Blazor Приложения\\ExampleHttp\\ExampleHttp.csproj": {
+    "D:\\visual studio\\Complex-task-apps-of-Jewerly-workshop\\Web\\ExampleHttp\\ExampleHttp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\visual studio\\Веб-приложение\\Blazor Приложения\\ExampleHttp\\ExampleHttp.csproj",
+        "projectUniqueName": "D:\\visual studio\\Complex-task-apps-of-Jewerly-workshop\\Web\\ExampleHttp\\ExampleHttp.csproj",
         "projectName": "ExampleHttp",
-        "projectPath": "D:\\visual studio\\Веб-приложение\\Blazor Приложения\\ExampleHttp\\ExampleHttp.csproj",
+        "projectPath": "D:\\visual studio\\Complex-task-apps-of-Jewerly-workshop\\Web\\ExampleHttp\\ExampleHttp.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "D:\\visual studio\\Веб-приложение\\Blazor Приложения\\ExampleHttp\\obj\\",
+        "outputPath": "D:\\visual studio\\Complex-task-apps-of-Jewerly-workshop\\Web\\ExampleHttp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"

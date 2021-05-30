@@ -30,18 +30,24 @@ namespace ExamplePG_Manager
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.tabControl_Main = new System.Windows.Forms.TabControl();
-            this.tabPage_Zakazs = new System.Windows.Forms.TabPage();
-            this.dqv_ZakazMain = new System.Windows.Forms.DataGridView();
-            this.Column_Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_Izdel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_Client = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_ContactInfo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.radioButton_readyZakaz = new System.Windows.Forms.RadioButton();
-            this.radioButton_loadZakaz = new System.Windows.Forms.RadioButton();
-            this.radioButton_newZakaz = new System.Windows.Forms.RadioButton();
-            this.tabPage_Comments = new System.Windows.Forms.TabPage();
+            this.jewerlyDataSet = new ExamplePG_Manager.jewerlyDataSet();
+            this.izdeliesprBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.izdelie_sprTableAdapter = new ExamplePG_Manager.jewerlyDataSetTableAdapters.izdelie_sprTableAdapter();
+            this.tabPage_sotrudnik = new System.Windows.Forms.TabPage();
+            this.button_addmaster = new System.Windows.Forms.Button();
+            this.button_savemaster = new System.Windows.Forms.Button();
+            this.button_downmaster = new System.Windows.Forms.Button();
+            this.button_upmaster = new System.Windows.Forms.Button();
+            this.numericUpDown_Stag = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox_address = new System.Windows.Forms.TextBox();
+            this.textBox_password = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBox_login = new System.Windows.Forms.TextBox();
+            this.textBox_fio = new System.Windows.Forms.TextBox();
             this.tabPage_DataMain = new System.Windows.Forms.TabPage();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -52,7 +58,7 @@ namespace ExamplePG_Manager
             this.Column_bank = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_Search = new System.Windows.Forms.Button();
             this.btn_Add = new System.Windows.Forms.Button();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage_izdSpr = new System.Windows.Forms.TabPage();
             this.btn_Insert = new System.Windows.Forms.Button();
             this.btn_Update = new System.Windows.Forms.Button();
             this.pictureBox_Izd = new System.Windows.Forms.PictureBox();
@@ -70,140 +76,197 @@ namespace ExamplePG_Manager
             this.label_mats = new System.Windows.Forms.Label();
             this.label_nameIzd = new System.Windows.Forms.Label();
             this.textBox_nameIzd = new System.Windows.Forms.TextBox();
-            this.jewerlyDataSet = new ExamplePG_Manager.jewerlyDataSet();
-            this.izdeliesprBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.izdelie_sprTableAdapter = new ExamplePG_Manager.jewerlyDataSetTableAdapters.izdelie_sprTableAdapter();
-            this.tabControl_Main.SuspendLayout();
-            this.tabPage_Zakazs.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dqv_ZakazMain)).BeginInit();
+            this.tabPage_Zakazs = new System.Windows.Forms.TabPage();
+            this.dgv_ZakazMain = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Izdel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Client = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_ContactInfo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.radioButton_readyZakaz = new System.Windows.Forms.RadioButton();
+            this.radioButton_loadZakaz = new System.Windows.Forms.RadioButton();
+            this.radioButton_newZakaz = new System.Windows.Forms.RadioButton();
+            this.tabControl_Main = new System.Windows.Forms.TabControl();
+            ((System.ComponentModel.ISupportInitialize)(this.jewerlyDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.izdeliesprBindingSource)).BeginInit();
+            this.tabPage_sotrudnik.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Stag)).BeginInit();
             this.tabPage_DataMain.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvg_Mats)).BeginInit();
-            this.tabPage1.SuspendLayout();
+            this.tabPage_izdSpr.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Izd)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.jewerlyDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.izdeliesprBindingSource)).BeginInit();
+            this.tabPage_Zakazs.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_ZakazMain)).BeginInit();
+            this.tabControl_Main.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl_Main
+            // jewerlyDataSet
             // 
-            this.tabControl_Main.Controls.Add(this.tabPage_Zakazs);
-            this.tabControl_Main.Controls.Add(this.tabPage_Comments);
-            this.tabControl_Main.Controls.Add(this.tabPage_DataMain);
-            this.tabControl_Main.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tabControl_Main.Location = new System.Drawing.Point(12, 12);
-            this.tabControl_Main.Name = "tabControl_Main";
-            this.tabControl_Main.SelectedIndex = 0;
-            this.tabControl_Main.Size = new System.Drawing.Size(981, 616);
-            this.tabControl_Main.TabIndex = 0;
+            this.jewerlyDataSet.DataSetName = "jewerlyDataSet";
+            this.jewerlyDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // tabPage_Zakazs
+            // izdeliesprBindingSource
             // 
-            this.tabPage_Zakazs.Controls.Add(this.dqv_ZakazMain);
-            this.tabPage_Zakazs.Controls.Add(this.radioButton_readyZakaz);
-            this.tabPage_Zakazs.Controls.Add(this.radioButton_loadZakaz);
-            this.tabPage_Zakazs.Controls.Add(this.radioButton_newZakaz);
-            this.tabPage_Zakazs.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tabPage_Zakazs.Location = new System.Drawing.Point(4, 29);
-            this.tabPage_Zakazs.Name = "tabPage_Zakazs";
-            this.tabPage_Zakazs.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Zakazs.Size = new System.Drawing.Size(973, 583);
-            this.tabPage_Zakazs.TabIndex = 0;
-            this.tabPage_Zakazs.Text = "Заказы";
-            this.tabPage_Zakazs.UseVisualStyleBackColor = true;
+            this.izdeliesprBindingSource.DataMember = "izdelie_spr";
+            this.izdeliesprBindingSource.DataSource = this.jewerlyDataSet;
             // 
-            // dqv_ZakazMain
+            // izdelie_sprTableAdapter
             // 
-            this.dqv_ZakazMain.AllowUserToAddRows = false;
-            this.dqv_ZakazMain.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dqv_ZakazMain.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dqv_ZakazMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dqv_ZakazMain.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column_Date,
-            this.Column_Izdel,
-            this.Column_Client,
-            this.Column_ContactInfo,
-            this.Column_Price});
-            this.dqv_ZakazMain.Location = new System.Drawing.Point(6, 214);
-            this.dqv_ZakazMain.Name = "dqv_ZakazMain";
-            this.dqv_ZakazMain.Size = new System.Drawing.Size(931, 328);
-            this.dqv_ZakazMain.TabIndex = 3;
-            this.dqv_ZakazMain.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dqv_ZakazMain_RowHeaderMouseDoubleClick);
+            this.izdelie_sprTableAdapter.ClearBeforeFill = true;
             // 
-            // Column_Date
+            // tabPage_sotrudnik
             // 
-            this.Column_Date.HeaderText = "Дата";
-            this.Column_Date.Name = "Column_Date";
+            this.tabPage_sotrudnik.Controls.Add(this.button_addmaster);
+            this.tabPage_sotrudnik.Controls.Add(this.button_savemaster);
+            this.tabPage_sotrudnik.Controls.Add(this.button_downmaster);
+            this.tabPage_sotrudnik.Controls.Add(this.button_upmaster);
+            this.tabPage_sotrudnik.Controls.Add(this.numericUpDown_Stag);
+            this.tabPage_sotrudnik.Controls.Add(this.label6);
+            this.tabPage_sotrudnik.Controls.Add(this.label4);
+            this.tabPage_sotrudnik.Controls.Add(this.label5);
+            this.tabPage_sotrudnik.Controls.Add(this.textBox_address);
+            this.tabPage_sotrudnik.Controls.Add(this.textBox_password);
+            this.tabPage_sotrudnik.Controls.Add(this.label3);
+            this.tabPage_sotrudnik.Controls.Add(this.label2);
+            this.tabPage_sotrudnik.Controls.Add(this.textBox_login);
+            this.tabPage_sotrudnik.Controls.Add(this.textBox_fio);
+            this.tabPage_sotrudnik.Location = new System.Drawing.Point(4, 29);
+            this.tabPage_sotrudnik.Name = "tabPage_sotrudnik";
+            this.tabPage_sotrudnik.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_sotrudnik.Size = new System.Drawing.Size(973, 583);
+            this.tabPage_sotrudnik.TabIndex = 3;
+            this.tabPage_sotrudnik.Text = "Сотрдники";
+            this.tabPage_sotrudnik.UseVisualStyleBackColor = true;
+            this.tabPage_sotrudnik.Enter += new System.EventHandler(this.tabPage_sotrudnik_Enter);
             // 
-            // Column_Izdel
+            // button_addmaster
             // 
-            this.Column_Izdel.HeaderText = "Изделие";
-            this.Column_Izdel.Name = "Column_Izdel";
+            this.button_addmaster.Location = new System.Drawing.Point(155, 475);
+            this.button_addmaster.Name = "button_addmaster";
+            this.button_addmaster.Size = new System.Drawing.Size(150, 46);
+            this.button_addmaster.TabIndex = 13;
+            this.button_addmaster.Text = "Добавить ";
+            this.button_addmaster.UseVisualStyleBackColor = true;
+            this.button_addmaster.Visible = false;
+            this.button_addmaster.Click += new System.EventHandler(this.button_addmaster_Click);
             // 
-            // Column_Client
+            // button_savemaster
             // 
-            this.Column_Client.HeaderText = "Клиент";
-            this.Column_Client.Name = "Column_Client";
+            this.button_savemaster.Location = new System.Drawing.Point(142, 423);
+            this.button_savemaster.Name = "button_savemaster";
+            this.button_savemaster.Size = new System.Drawing.Size(189, 46);
+            this.button_savemaster.TabIndex = 12;
+            this.button_savemaster.Text = "Сохранить изменения";
+            this.button_savemaster.UseVisualStyleBackColor = true;
+            this.button_savemaster.Click += new System.EventHandler(this.button_savemaster_Click);
             // 
-            // Column_ContactInfo
+            // button_downmaster
             // 
-            this.Column_ContactInfo.HeaderText = "Контактная инфо.";
-            this.Column_ContactInfo.Name = "Column_ContactInfo";
+            this.button_downmaster.Location = new System.Drawing.Point(101, 361);
+            this.button_downmaster.Name = "button_downmaster";
+            this.button_downmaster.Size = new System.Drawing.Size(77, 56);
+            this.button_downmaster.TabIndex = 11;
+            this.button_downmaster.Text = "<";
+            this.button_downmaster.UseVisualStyleBackColor = true;
+            this.button_downmaster.Click += new System.EventHandler(this.button_downmaster_Click);
             // 
-            // Column_Price
+            // button_upmaster
             // 
-            this.Column_Price.HeaderText = "Цена";
-            this.Column_Price.Name = "Column_Price";
+            this.button_upmaster.Location = new System.Drawing.Point(315, 361);
+            this.button_upmaster.Name = "button_upmaster";
+            this.button_upmaster.Size = new System.Drawing.Size(77, 56);
+            this.button_upmaster.TabIndex = 10;
+            this.button_upmaster.Text = ">";
+            this.button_upmaster.UseVisualStyleBackColor = true;
+            this.button_upmaster.Click += new System.EventHandler(this.button_upmaster_Click);
             // 
-            // radioButton_readyZakaz
+            // numericUpDown_Stag
             // 
-            this.radioButton_readyZakaz.AutoSize = true;
-            this.radioButton_readyZakaz.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.radioButton_readyZakaz.Location = new System.Drawing.Point(35, 124);
-            this.radioButton_readyZakaz.Name = "radioButton_readyZakaz";
-            this.radioButton_readyZakaz.Size = new System.Drawing.Size(149, 24);
-            this.radioButton_readyZakaz.TabIndex = 2;
-            this.radioButton_readyZakaz.TabStop = true;
-            this.radioButton_readyZakaz.Text = "Готовые заказы";
-            this.radioButton_readyZakaz.UseVisualStyleBackColor = true;
-            this.radioButton_readyZakaz.CheckedChanged += new System.EventHandler(this.radioButton_readyZakaz_CheckedChanged);
+            this.numericUpDown_Stag.Location = new System.Drawing.Point(172, 309);
+            this.numericUpDown_Stag.Maximum = new decimal(new int[] {
+            70,
+            0,
+            0,
+            0});
+            this.numericUpDown_Stag.Name = "numericUpDown_Stag";
+            this.numericUpDown_Stag.Size = new System.Drawing.Size(120, 26);
+            this.numericUpDown_Stag.TabIndex = 9;
             // 
-            // radioButton_loadZakaz
+            // label6
             // 
-            this.radioButton_loadZakaz.AutoSize = true;
-            this.radioButton_loadZakaz.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.radioButton_loadZakaz.Location = new System.Drawing.Point(35, 83);
-            this.radioButton_loadZakaz.Name = "radioButton_loadZakaz";
-            this.radioButton_loadZakaz.Size = new System.Drawing.Size(212, 24);
-            this.radioButton_loadZakaz.TabIndex = 1;
-            this.radioButton_loadZakaz.TabStop = true;
-            this.radioButton_loadZakaz.Text = "Выполняющиеся заказы";
-            this.radioButton_loadZakaz.UseVisualStyleBackColor = true;
-            this.radioButton_loadZakaz.CheckedChanged += new System.EventHandler(this.radioButton_loadZakaz_CheckedChanged);
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(41, 315);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(109, 20);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Стаж работы";
             // 
-            // radioButton_newZakaz
+            // label4
             // 
-            this.radioButton_newZakaz.AutoSize = true;
-            this.radioButton_newZakaz.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.radioButton_newZakaz.Location = new System.Drawing.Point(35, 37);
-            this.radioButton_newZakaz.Name = "radioButton_newZakaz";
-            this.radioButton_newZakaz.Size = new System.Drawing.Size(134, 24);
-            this.radioButton_newZakaz.TabIndex = 0;
-            this.radioButton_newZakaz.TabStop = true;
-            this.radioButton_newZakaz.Text = "Новые заказы";
-            this.radioButton_newZakaz.UseVisualStyleBackColor = true;
-            this.radioButton_newZakaz.CheckedChanged += new System.EventHandler(this.radioButton_newZakaz_CheckedChanged);
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(93, 253);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(57, 20);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Адрес";
             // 
-            // tabPage_Comments
+            // label5
             // 
-            this.tabPage_Comments.Location = new System.Drawing.Point(4, 29);
-            this.tabPage_Comments.Name = "tabPage_Comments";
-            this.tabPage_Comments.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Comments.Size = new System.Drawing.Size(973, 583);
-            this.tabPage_Comments.TabIndex = 1;
-            this.tabPage_Comments.Text = "Диалоги с клиентами";
-            this.tabPage_Comments.UseVisualStyleBackColor = true;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(81, 181);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(67, 20);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "Пароль";
+            // 
+            // textBox_address
+            // 
+            this.textBox_address.Location = new System.Drawing.Point(172, 250);
+            this.textBox_address.Name = "textBox_address";
+            this.textBox_address.Size = new System.Drawing.Size(220, 26);
+            this.textBox_address.TabIndex = 5;
+            // 
+            // textBox_password
+            // 
+            this.textBox_password.Location = new System.Drawing.Point(172, 181);
+            this.textBox_password.Name = "textBox_password";
+            this.textBox_password.Size = new System.Drawing.Size(220, 26);
+            this.textBox_password.TabIndex = 4;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(93, 110);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 20);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Логин";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(97, 41);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(51, 20);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "ФИО ";
+            // 
+            // textBox_login
+            // 
+            this.textBox_login.Location = new System.Drawing.Point(172, 107);
+            this.textBox_login.Name = "textBox_login";
+            this.textBox_login.Size = new System.Drawing.Size(220, 26);
+            this.textBox_login.TabIndex = 1;
+            // 
+            // textBox_fio
+            // 
+            this.textBox_fio.Location = new System.Drawing.Point(172, 38);
+            this.textBox_fio.Name = "textBox_fio";
+            this.textBox_fio.Size = new System.Drawing.Size(220, 26);
+            this.textBox_fio.TabIndex = 0;
             // 
             // tabPage_DataMain
             // 
@@ -215,15 +278,16 @@ namespace ExamplePG_Manager
             this.tabPage_DataMain.TabIndex = 2;
             this.tabPage_DataMain.Text = "Справочники";
             this.tabPage_DataMain.UseVisualStyleBackColor = true;
+            this.tabPage_DataMain.Enter += new System.EventHandler(this.tabPage_DataMain_Enter);
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage_izdSpr);
             this.tabControl1.Location = new System.Drawing.Point(6, 6);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(961, 571);
+            this.tabControl1.Size = new System.Drawing.Size(961, 560);
             this.tabControl1.TabIndex = 4;
             // 
             // tabPage2
@@ -234,10 +298,11 @@ namespace ExamplePG_Manager
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(953, 538);
+            this.tabPage2.Size = new System.Drawing.Size(953, 527);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Материалы";
             this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPage2.Enter += new System.EventHandler(this.tabPage2_Enter_1);
             // 
             // dvg_Mats
             // 
@@ -250,7 +315,7 @@ namespace ExamplePG_Manager
             this.Column_URL,
             this.Column_PriceOne,
             this.Column_bank});
-            this.dvg_Mats.Location = new System.Drawing.Point(6, 65);
+            this.dvg_Mats.Location = new System.Drawing.Point(21, 33);
             this.dvg_Mats.Name = "dvg_Mats";
             this.dvg_Mats.Size = new System.Drawing.Size(631, 242);
             this.dvg_Mats.TabIndex = 1;
@@ -281,9 +346,9 @@ namespace ExamplePG_Manager
             // 
             // btn_Search
             // 
-            this.btn_Search.Location = new System.Drawing.Point(314, 362);
+            this.btn_Search.Location = new System.Drawing.Point(173, 281);
             this.btn_Search.Name = "btn_Search";
-            this.btn_Search.Size = new System.Drawing.Size(131, 45);
+            this.btn_Search.Size = new System.Drawing.Size(149, 48);
             this.btn_Search.TabIndex = 2;
             this.btn_Search.Text = "Поиск";
             this.btn_Search.UseVisualStyleBackColor = true;
@@ -291,40 +356,41 @@ namespace ExamplePG_Manager
             // 
             // btn_Add
             // 
-            this.btn_Add.Location = new System.Drawing.Point(90, 362);
+            this.btn_Add.Location = new System.Drawing.Point(395, 281);
             this.btn_Add.Name = "btn_Add";
-            this.btn_Add.Size = new System.Drawing.Size(131, 45);
+            this.btn_Add.Size = new System.Drawing.Size(158, 48);
             this.btn_Add.TabIndex = 0;
             this.btn_Add.Text = "Добавить";
             this.btn_Add.UseVisualStyleBackColor = true;
             this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
             // 
-            // tabPage1
+            // tabPage_izdSpr
             // 
-            this.tabPage1.Controls.Add(this.btn_Insert);
-            this.tabPage1.Controls.Add(this.btn_Update);
-            this.tabPage1.Controls.Add(this.pictureBox_Izd);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.textBox_rabota);
-            this.tabPage1.Controls.Add(this.label_nameItm);
-            this.tabPage1.Controls.Add(this.textBox_nameweb);
-            this.tabPage1.Controls.Add(this.btn_up);
-            this.tabPage1.Controls.Add(this.btn_down);
-            this.tabPage1.Controls.Add(this.label_url);
-            this.tabPage1.Controls.Add(this.textBox_urlIzd);
-            this.tabPage1.Controls.Add(this.comboBox_tipIzd);
-            this.tabPage1.Controls.Add(this.label_tipIzd);
-            this.tabPage1.Controls.Add(this.comboBox_mats);
-            this.tabPage1.Controls.Add(this.label_mats);
-            this.tabPage1.Controls.Add(this.label_nameIzd);
-            this.tabPage1.Controls.Add(this.textBox_nameIzd);
-            this.tabPage1.Location = new System.Drawing.Point(4, 29);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(953, 538);
-            this.tabPage1.TabIndex = 2;
-            this.tabPage1.Text = "Изделия";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage_izdSpr.Controls.Add(this.btn_Insert);
+            this.tabPage_izdSpr.Controls.Add(this.btn_Update);
+            this.tabPage_izdSpr.Controls.Add(this.pictureBox_Izd);
+            this.tabPage_izdSpr.Controls.Add(this.label1);
+            this.tabPage_izdSpr.Controls.Add(this.textBox_rabota);
+            this.tabPage_izdSpr.Controls.Add(this.label_nameItm);
+            this.tabPage_izdSpr.Controls.Add(this.textBox_nameweb);
+            this.tabPage_izdSpr.Controls.Add(this.btn_up);
+            this.tabPage_izdSpr.Controls.Add(this.btn_down);
+            this.tabPage_izdSpr.Controls.Add(this.label_url);
+            this.tabPage_izdSpr.Controls.Add(this.textBox_urlIzd);
+            this.tabPage_izdSpr.Controls.Add(this.comboBox_tipIzd);
+            this.tabPage_izdSpr.Controls.Add(this.label_tipIzd);
+            this.tabPage_izdSpr.Controls.Add(this.comboBox_mats);
+            this.tabPage_izdSpr.Controls.Add(this.label_mats);
+            this.tabPage_izdSpr.Controls.Add(this.label_nameIzd);
+            this.tabPage_izdSpr.Controls.Add(this.textBox_nameIzd);
+            this.tabPage_izdSpr.Location = new System.Drawing.Point(4, 29);
+            this.tabPage_izdSpr.Name = "tabPage_izdSpr";
+            this.tabPage_izdSpr.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_izdSpr.Size = new System.Drawing.Size(953, 527);
+            this.tabPage_izdSpr.TabIndex = 2;
+            this.tabPage_izdSpr.Text = "Изделия";
+            this.tabPage_izdSpr.UseVisualStyleBackColor = true;
+            this.tabPage_izdSpr.Enter += new System.EventHandler(this.tabPage_izdSpr_Enter);
             // 
             // btn_Insert
             // 
@@ -346,9 +412,9 @@ namespace ExamplePG_Manager
             // 
             // pictureBox_Izd
             // 
-            this.pictureBox_Izd.Location = new System.Drawing.Point(363, 6);
+            this.pictureBox_Izd.Location = new System.Drawing.Point(402, 6);
             this.pictureBox_Izd.Name = "pictureBox_Izd";
-            this.pictureBox_Izd.Size = new System.Drawing.Size(496, 372);
+            this.pictureBox_Izd.Size = new System.Drawing.Size(496, 392);
             this.pictureBox_Izd.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox_Izd.TabIndex = 15;
             this.pictureBox_Izd.TabStop = false;
@@ -477,19 +543,129 @@ namespace ExamplePG_Manager
             this.textBox_nameIzd.TabIndex = 0;
             this.textBox_nameIzd.Click += new System.EventHandler(this.textBox_nameIzd_Click);
             // 
-            // jewerlyDataSet
+            // tabPage_Zakazs
             // 
-            this.jewerlyDataSet.DataSetName = "jewerlyDataSet";
-            this.jewerlyDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.tabPage_Zakazs.Controls.Add(this.dgv_ZakazMain);
+            this.tabPage_Zakazs.Controls.Add(this.radioButton_readyZakaz);
+            this.tabPage_Zakazs.Controls.Add(this.radioButton_loadZakaz);
+            this.tabPage_Zakazs.Controls.Add(this.radioButton_newZakaz);
+            this.tabPage_Zakazs.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tabPage_Zakazs.Location = new System.Drawing.Point(4, 29);
+            this.tabPage_Zakazs.Name = "tabPage_Zakazs";
+            this.tabPage_Zakazs.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_Zakazs.Size = new System.Drawing.Size(973, 583);
+            this.tabPage_Zakazs.TabIndex = 0;
+            this.tabPage_Zakazs.Text = "Заказы";
+            this.tabPage_Zakazs.UseVisualStyleBackColor = true;
+            this.tabPage_Zakazs.Enter += new System.EventHandler(this.tabPage_Zakazs_Enter);
             // 
-            // izdeliesprBindingSource
+            // dgv_ZakazMain
             // 
-            this.izdeliesprBindingSource.DataMember = "izdelie_spr";
-            this.izdeliesprBindingSource.DataSource = this.jewerlyDataSet;
+            this.dgv_ZakazMain.AllowUserToAddRows = false;
+            this.dgv_ZakazMain.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv_ZakazMain.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgv_ZakazMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_ZakazMain.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
+            this.Column_Date,
+            this.Column_Izdel,
+            this.Column_Client,
+            this.Column_ContactInfo,
+            this.Column_Price});
+            this.dgv_ZakazMain.Location = new System.Drawing.Point(19, 221);
+            this.dgv_ZakazMain.Name = "dgv_ZakazMain";
+            this.dgv_ZakazMain.ReadOnly = true;
+            this.dgv_ZakazMain.Size = new System.Drawing.Size(931, 348);
+            this.dgv_ZakazMain.TabIndex = 3;
+            this.dgv_ZakazMain.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dqv_ZakazMain_RowHeaderMouseDoubleClick);
             // 
-            // izdelie_sprTableAdapter
+            // id
             // 
-            this.izdelie_sprTableAdapter.ClearBeforeFill = true;
+            this.id.FillWeight = 15.22843F;
+            this.id.HeaderText = "Column1";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // Column_Date
+            // 
+            this.Column_Date.FillWeight = 116.9543F;
+            this.Column_Date.HeaderText = "Дата";
+            this.Column_Date.Name = "Column_Date";
+            // 
+            // Column_Izdel
+            // 
+            this.Column_Izdel.FillWeight = 116.9543F;
+            this.Column_Izdel.HeaderText = "Изделие";
+            this.Column_Izdel.Name = "Column_Izdel";
+            // 
+            // Column_Client
+            // 
+            this.Column_Client.FillWeight = 116.9543F;
+            this.Column_Client.HeaderText = "Клиент";
+            this.Column_Client.Name = "Column_Client";
+            // 
+            // Column_ContactInfo
+            // 
+            this.Column_ContactInfo.FillWeight = 116.9543F;
+            this.Column_ContactInfo.HeaderText = "Контактная инфо.";
+            this.Column_ContactInfo.Name = "Column_ContactInfo";
+            // 
+            // Column_Price
+            // 
+            this.Column_Price.FillWeight = 116.9543F;
+            this.Column_Price.HeaderText = "Цена, P";
+            this.Column_Price.Name = "Column_Price";
+            // 
+            // radioButton_readyZakaz
+            // 
+            this.radioButton_readyZakaz.AutoSize = true;
+            this.radioButton_readyZakaz.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.radioButton_readyZakaz.Location = new System.Drawing.Point(35, 124);
+            this.radioButton_readyZakaz.Name = "radioButton_readyZakaz";
+            this.radioButton_readyZakaz.Size = new System.Drawing.Size(149, 24);
+            this.radioButton_readyZakaz.TabIndex = 2;
+            this.radioButton_readyZakaz.Text = "Готовые заказы";
+            this.radioButton_readyZakaz.UseVisualStyleBackColor = true;
+            this.radioButton_readyZakaz.CheckedChanged += new System.EventHandler(this.radioButton_readyZakaz_CheckedChanged);
+            // 
+            // radioButton_loadZakaz
+            // 
+            this.radioButton_loadZakaz.AutoSize = true;
+            this.radioButton_loadZakaz.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.radioButton_loadZakaz.Location = new System.Drawing.Point(35, 83);
+            this.radioButton_loadZakaz.Name = "radioButton_loadZakaz";
+            this.radioButton_loadZakaz.Size = new System.Drawing.Size(212, 24);
+            this.radioButton_loadZakaz.TabIndex = 1;
+            this.radioButton_loadZakaz.Text = "Выполняющиеся заказы";
+            this.radioButton_loadZakaz.UseVisualStyleBackColor = true;
+            this.radioButton_loadZakaz.CheckedChanged += new System.EventHandler(this.radioButton_loadZakaz_CheckedChanged);
+            // 
+            // radioButton_newZakaz
+            // 
+            this.radioButton_newZakaz.AutoSize = true;
+            this.radioButton_newZakaz.Checked = true;
+            this.radioButton_newZakaz.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.radioButton_newZakaz.Location = new System.Drawing.Point(35, 37);
+            this.radioButton_newZakaz.Name = "radioButton_newZakaz";
+            this.radioButton_newZakaz.Size = new System.Drawing.Size(134, 24);
+            this.radioButton_newZakaz.TabIndex = 0;
+            this.radioButton_newZakaz.TabStop = true;
+            this.radioButton_newZakaz.Text = "Новые заказы";
+            this.radioButton_newZakaz.UseVisualStyleBackColor = true;
+            this.radioButton_newZakaz.CheckedChanged += new System.EventHandler(this.radioButton_newZakaz_CheckedChanged);
+            // 
+            // tabControl_Main
+            // 
+            this.tabControl_Main.Controls.Add(this.tabPage_Zakazs);
+            this.tabControl_Main.Controls.Add(this.tabPage_DataMain);
+            this.tabControl_Main.Controls.Add(this.tabPage_sotrudnik);
+            this.tabControl_Main.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tabControl_Main.Location = new System.Drawing.Point(12, 12);
+            this.tabControl_Main.Name = "tabControl_Main";
+            this.tabControl_Main.SelectedIndex = 0;
+            this.tabControl_Main.Size = new System.Drawing.Size(981, 616);
+            this.tabControl_Main.TabIndex = 0;
             // 
             // Form1
             // 
@@ -497,61 +673,53 @@ namespace ExamplePG_Manager
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1005, 640);
             this.Controls.Add(this.tabControl_Main);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Главное меню";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.tabControl_Main.ResumeLayout(false);
-            this.tabPage_Zakazs.ResumeLayout(false);
-            this.tabPage_Zakazs.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dqv_ZakazMain)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.jewerlyDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.izdeliesprBindingSource)).EndInit();
+            this.tabPage_sotrudnik.ResumeLayout(false);
+            this.tabPage_sotrudnik.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Stag)).EndInit();
             this.tabPage_DataMain.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dvg_Mats)).EndInit();
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.tabPage_izdSpr.ResumeLayout(false);
+            this.tabPage_izdSpr.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Izd)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.jewerlyDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.izdeliesprBindingSource)).EndInit();
+            this.tabPage_Zakazs.ResumeLayout(false);
+            this.tabPage_Zakazs.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_ZakazMain)).EndInit();
+            this.tabControl_Main.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TabControl tabControl_Main;
-        private System.Windows.Forms.TabPage tabPage_Zakazs;
-        private System.Windows.Forms.DataGridView dqv_ZakazMain;
-        private System.Windows.Forms.RadioButton radioButton_readyZakaz;
-        private System.Windows.Forms.RadioButton radioButton_loadZakaz;
-        private System.Windows.Forms.RadioButton radioButton_newZakaz;
-        private System.Windows.Forms.TabPage tabPage_Comments;
+        private jewerlyDataSet jewerlyDataSet;
+        private System.Windows.Forms.BindingSource izdeliesprBindingSource;
+        private jewerlyDataSetTableAdapters.izdelie_sprTableAdapter izdelie_sprTableAdapter;
+        private System.Windows.Forms.TabPage tabPage_sotrudnik;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBox_login;
+        private System.Windows.Forms.TextBox textBox_fio;
         private System.Windows.Forms.TabPage tabPage_DataMain;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Date;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Izdel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Client;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_ContactInfo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Price;
-        private System.Windows.Forms.Button btn_Add;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridView dvg_Mats;
-        private System.Windows.Forms.Button btn_Search;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_URL;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_PriceOne;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_bank;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private jewerlyDataSet jewerlyDataSet;
-        private System.Windows.Forms.BindingSource izdeliesprBindingSource;
-        private jewerlyDataSetTableAdapters.izdelie_sprTableAdapter izdelie_sprTableAdapter;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.Label label_mats;
-        private System.Windows.Forms.Label label_nameIzd;
-        private System.Windows.Forms.TextBox textBox_nameIzd;
-        private System.Windows.Forms.ComboBox comboBox_mats;
-        private System.Windows.Forms.ComboBox comboBox_tipIzd;
-        private System.Windows.Forms.Label label_tipIzd;
+        private System.Windows.Forms.Button btn_Search;
+        private System.Windows.Forms.Button btn_Add;
+        private System.Windows.Forms.TabPage tabPage_izdSpr;
+        private System.Windows.Forms.Button btn_Insert;
+        private System.Windows.Forms.Button btn_Update;
         private System.Windows.Forms.PictureBox pictureBox_Izd;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox_rabota;
@@ -561,8 +729,34 @@ namespace ExamplePG_Manager
         private System.Windows.Forms.Button btn_down;
         private System.Windows.Forms.Label label_url;
         private System.Windows.Forms.TextBox textBox_urlIzd;
-        private System.Windows.Forms.Button btn_Insert;
-        private System.Windows.Forms.Button btn_Update;
+        private System.Windows.Forms.ComboBox comboBox_tipIzd;
+        private System.Windows.Forms.Label label_tipIzd;
+        private System.Windows.Forms.ComboBox comboBox_mats;
+        private System.Windows.Forms.Label label_mats;
+        private System.Windows.Forms.Label label_nameIzd;
+        private System.Windows.Forms.TextBox textBox_nameIzd;
+        private System.Windows.Forms.TabPage tabPage_Zakazs;
+        private System.Windows.Forms.DataGridView dgv_ZakazMain;
+        private System.Windows.Forms.RadioButton radioButton_readyZakaz;
+        private System.Windows.Forms.RadioButton radioButton_loadZakaz;
+        private System.Windows.Forms.RadioButton radioButton_newZakaz;
+        private System.Windows.Forms.TabControl tabControl_Main;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBox_address;
+        private System.Windows.Forms.TextBox textBox_password;
+        private System.Windows.Forms.Button button_downmaster;
+        private System.Windows.Forms.Button button_upmaster;
+        private System.Windows.Forms.NumericUpDown numericUpDown_Stag;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button button_savemaster;
+        private System.Windows.Forms.Button button_addmaster;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Izdel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Client;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_ContactInfo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Price;
     }
 }
 
