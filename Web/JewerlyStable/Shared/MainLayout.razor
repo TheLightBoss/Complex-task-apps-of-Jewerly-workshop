@@ -1,0 +1,129 @@
+﻿@inherits LayoutComponentBase
+
+
+<MudAppBar Color="Color.Primary" Fixed="false">
+    @*<NavLink class="nav-link" href="counter">
+            <span class="oi oi-plus" aria-hidden="true"></span> Counter
+        </NavLink>
+
+        <NavLink class="nav-link" href="configurator_page">
+            <MudIcon Icon="@Icons.Material.Filled.DesignServices"></MudIcon> Собрать изделие
+        </NavLink>*@
+
+
+    <MudLink></MudLink>
+    <MudAppBarSpacer />
+    <MudLink Color="Color.Dark" Href="configurator_page"><MudIcon Icon="@Icons.Material.Filled.DesignServices"></MudIcon> Собрать изделие</MudLink>
+    <MudAppBarSpacer />
+    <MudLink Color="Color.Dark" Href=""><MudIcon Icon="@Icons.Material.Filled.Storage"></MudIcon>Мои заказы</MudLink>
+    <MudAppBarSpacer />
+    <MudLink Color="Color.Dark" Href="https://docs.microsoft.com/aspnet/"><MudIcon Icon="@Icons.Material.Filled.Info"></MudIcon>О компании</MudLink>
+    <MudAppBarSpacer />
+    <MudLink Color="Color.Dark" Href="https://docs.microsoft.com/aspnet/"><MudIcon Icon="@Icons.Material.Filled.HowToReg"></MudIcon>Авторизация</MudLink>
+    <MudAppBarSpacer/>
+    <MudLink></MudLink>
+</MudAppBar>
+
+
+<MudContainer Style = "height: 700px; width:100%;">
+    @Body
+</MudContainer>
+<footer class="footer-dark" style="margin-top:60px; padding: 50px 0; color: #f0f9ff; background-color: #282d32;">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-3 item">
+                <h3>Сервисы</h3>
+                <ul>
+                    <li><a href="#">Web design</a></li>
+                    <li><a href="#">Hosting</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-6 col-md-3 item">
+                <h3>Информация</h3>
+                <ul>
+                    <li><a href="#">Company</a></li>
+                    <li><a href="#">Team</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="col-md-6 item text">
+                <h3>Ювелирка</h3>
+                <p>Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac sem lacus. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.</p>
+            </div>
+            <div class="col item social"><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a></div>
+        </div>
+        <p class="copyright">Company Name © 2021</p>
+    </div>
+</footer>
+
+
+
+
+<MudThemeProvider Theme="MyCustomTheme" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+
+
+@code{
+    MudTheme MyCustomTheme = new MudTheme()
+    {
+        Palette = new Palette()
+        {
+            Primary = Colors.Grey.Darken3,
+            //Primary = Colors.Blue.Darken1,
+            //Error = Colors.Blue.Darken1,
+            Dark = Colors.Shades.White,
+        },
+
+        LayoutProperties = new LayoutProperties()
+        {
+            DrawerWidthLeft = "260px",
+            DrawerWidthRight = "300px"
+        }
+    }; //цвета
+
+
+}
+
+
+
+@*<MudAppBar Color="Color.Success" Fixed="false">
+        <NavLink class="nav-link" href="counter">
+            <span class="oi oi-plus" aria-hidden="true"></span> Counter
+        </NavLink>
+        <MudLink Color="Color.Dark" Href="counter">Собрать изделие</MudLink>
+        <MudAppBarSpacer />
+        <MudLink Color="Color.Dark" Href="https://docs.microsoft.com/aspnet/">Мои заказы</MudLink>
+        <MudAppBarSpacer />
+        <MudLink Color="Color.Dark" Href="https://docs.microsoft.com/aspnet/">О компании</MudLink>
+        <MudAppBarSpacer />
+        <MudLink Color="Color.Dark" Href="https://docs.microsoft.com/aspnet/">Авторизация</MudLink>
+    </MudAppBar>
+
+    <MudContainer>
+        @Body
+    </MudContainer>*@
+
+
+<!--
+    <div class="page">
+     <!--
+     <div class="sidebar">
+         <NavMenu />
+     </div>
+
+     -->
+<!--
+<div class="main">
+
+    <!--<div class="top-row px-4">
+        <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+    </div>
+
+<div class="content px-4">
+    @Body
+    </div>
+</div>
+    </div>
+   -->
