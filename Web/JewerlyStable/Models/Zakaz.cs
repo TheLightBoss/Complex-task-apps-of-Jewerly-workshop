@@ -10,8 +10,7 @@ namespace JewerlyStable
     {
         public Zakaz()
         {
-            Answers = new HashSet<Answer>();
-            Comments = new HashSet<Comment>();
+
         }
 
         public int IdZak { get; set; }
@@ -24,7 +23,6 @@ namespace JewerlyStable
         public virtual User IdClientNavigation { get; set; }
         public virtual Dostavka IdDostNavigation { get; set; }
         public virtual Izdelie IdIzdNavigation { get; set; }
-        public virtual ICollection<Answer> Answers { get; set; }
-        public virtual ICollection<Comment> Comments { get; set; }
+
     }
 }

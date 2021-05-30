@@ -10,7 +10,7 @@ namespace JewerlyStable.Data
     {
         public User()
         {
-            //Zakazs = new HashSet<Zakaz>();
+            Zakazs = new HashSet<Zakaz>();
         }
 
 
@@ -20,7 +20,7 @@ namespace JewerlyStable.Data
         //public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
         //public virtual ICollection<AspNetUserRole> AspNetUserRoles { get; set; }
         //public virtual ICollection<AspNetUserToken> AspNetUserTokens { get; set; }
-        //public virtual ICollection<Zakaz> Zakazs { get; set; }
+        public virtual ICollection<Zakaz> Zakazs { get; set; }
 
     }
 }

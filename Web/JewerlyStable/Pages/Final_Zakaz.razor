@@ -93,16 +93,16 @@
         izdel.IdProb = 1;
         izdel.Razmer = selectedVal;
         izdel.PriceIzd = Math.Round(cena.Koeff.Value * cena.PriceMater.Value * Convert.ToDecimal(selectedVal), 2);
-        var idIzd = Service.InsertIzdelie(izdel);
+        Service.InsertIzdelie(izdel);
         var auState = await authenticationStateTask;
         var User = auState.User;
         var us = await userManager.GetUserAsync(User);
         zakaz.IdClient = us.Id;
         zakaz.IdDost = null;
         zakaz.DateZak = DateTime.Now;
-        zakaz.IdIzd = idIzd;
+        zakaz.IdIzd = izdel.IdIzd;
         zakaz.StatusZak = false;
-        zakaz.IdClientNavigation = us;
+        //zakaz.IdClient
         zakazServ.InsertZakaz(zakaz);
 
     }

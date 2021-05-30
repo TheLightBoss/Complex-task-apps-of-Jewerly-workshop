@@ -84,11 +84,11 @@ namespace JewerlyStable
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("answers_fkey");
 
-                entity.HasOne(d => d.IdZakNavigation)
-                    .WithMany(p => p.Answers)
-                    .HasForeignKey(d => d.IdZak)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("answers2_fkey");
+                //entity.HasOne(d => d.IdZakNavigation)
+                //    .WithMany(p => p.Answers)
+                //    .HasForeignKey(d => d.IdZak)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("answers2_fkey");
             });
 
             //modelBuilder.Entity<AspNetRole>(entity =>
@@ -249,11 +249,11 @@ namespace JewerlyStable
                     .HasForeignKey(d => d.IdClient)
                     .HasConstraintName("comments2_fkey");
 
-                entity.HasOne(d => d.IdZakNavigation)
-                    .WithMany(p => p.Comments)
-                    .HasForeignKey(d => d.IdZak)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("comments_fkey");
+                //entity.HasOne(d => d.IdZakNavigation)
+                //    .WithMany(p => p.Comments)
+                //    .HasForeignKey(d => d.IdZak)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("comments_fkey");
             });
 
             modelBuilder.Entity<Dostavka>(entity =>
