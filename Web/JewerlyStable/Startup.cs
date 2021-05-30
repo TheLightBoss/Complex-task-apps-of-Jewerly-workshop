@@ -35,7 +35,7 @@ namespace JewerlyStable
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Myconnection")));
-            services.AddDbContext<jewerlyContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Myconnection")));
+            services.AddDbContext<jewerly_newContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Myconnection")));
             services.AddIdentity<User, IdentityRole>(opts =>
             {
                 opts.SignIn.RequireConfirmedAccount = false;

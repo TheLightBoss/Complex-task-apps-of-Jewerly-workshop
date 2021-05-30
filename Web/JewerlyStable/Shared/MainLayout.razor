@@ -13,22 +13,40 @@
 
     <MudLink></MudLink>
     <MudAppBarSpacer />
-    <MudLink Color="Color.Dark" Href="configurator_page"><MudIcon Icon="@Icons.Material.Filled.DesignServices"></MudIcon> Собрать изделие</MudLink>
+    <MudLink Color="Color.Dark" Href="configurator_page"><MudIcon Icon="@Icons.Material.Filled.DesignServices"></MudIcon>Собрать изделие</MudLink>
     <MudAppBarSpacer />
-    <MudLink Color="Color.Dark" Href=""><MudIcon Icon="@Icons.Material.Filled.Storage"></MudIcon>Мои заказы</MudLink>
-    <MudAppBarSpacer />
+    <AuthorizeView>
+        <Authorized>
+            <MudLink Color="Color.Dark" Href=""><MudIcon Icon="@Icons.Material.Filled.Storage"></MudIcon>Мои заказы</MudLink>
+            <MudAppBarSpacer />
+        </Authorized>
+    </AuthorizeView>
     <MudLink Color="Color.Dark" Href="https://docs.microsoft.com/aspnet/"><MudIcon Icon="@Icons.Material.Filled.Info"></MudIcon>О компании</MudLink>
     <MudAppBarSpacer />
-    <MudLink Color="Color.Dark" Href="https://docs.microsoft.com/aspnet/"><MudIcon Icon="@Icons.Material.Filled.HowToReg"></MudIcon>Авторизация</MudLink>
-    <MudAppBarSpacer/>
+    <AuthorizeView>
+        <Authorized>
+            <MudLink Href="Identity/Account/Manage">Hello, @context.User.Identity.Name!</MudLink>
+            <form method="post" action="Identity/Account/LogOut">
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Outlined" Color="Color.Dark">Log out</MudButton>
+            </form>
+        </Authorized>
+        <NotAuthorized>
+            <MudLink Color="Color.Dark" Href="Identity/Account/Login" Class="px-1"><MudIcon Icon="@Icons.Material.Filled.Login"></MudIcon>Авторизация</MudLink>
+            <MudLink Color="Color.Dark" Href="Identity/Account/Register" Class="px-1"><MudIcon Icon="@Icons.Material.Filled.HowToReg"></MudIcon>Регистрация</MudLink>
+        </NotAuthorized>
+    </AuthorizeView>
+    <MudAppBarSpacer />
     <MudLink></MudLink>
 </MudAppBar>
 
 
-<MudContainer Style = "height: 700px; width:100%;">
+<MudContainer Style="height: 700px; width:100%;">
     @Body
 </MudContainer>
-<footer class="footer-dark" style="margin-top:60px; padding: 50px 0; color: #f0f9ff; background-color: #282d32;">
+<footer class="footer-dark" style=" margin-top: 60px;
+        padding: 50px 0;
+        color: #f0f9ff;
+        background-color: #424242;">
     <div class="container">
         <div class="row">
             <div class="col-sm-6 col-md-3 item">

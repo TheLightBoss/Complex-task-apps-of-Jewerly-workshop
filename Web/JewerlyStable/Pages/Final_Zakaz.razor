@@ -1,7 +1,7 @@
 ﻿@page "/final_zakaz"
 @inject IzdelieService Service
 @inject ZakazService zakazServ
-@inject AuthenticationState auState
+@inject UserManager<User> userManager
 
 
 
@@ -20,11 +20,11 @@
                     </div>
                     <br />
                     @*<select @onchange="Callback" value="@selectedVal">
-           @for (double i = 15; i <= 20; i += 0.5)
-            {
-                <option value="@i" />
-            }
-        </select>*@
+                           @for (double i = 15; i <= 20; i += 0.5)
+                            {
+                                <option value="@i" />
+                            }
+                        </select>*@
                     <MudSelect ValueChanged="Price_shet" T="double" Label="Размер" Strict="true" Variant="Variant.Filled" Format="F2">
                         @for (double i = 15; i <= 20; i += 0.5)
                         {
@@ -68,31 +68,42 @@
             DrawerWidthRight = "300px"
         }
     }; //цвета
-    Cena cena = new();
+    SetCena cena = new();
     protected override void OnInitialized()
     {
-        cena = zakazServ.CenaDetal(spr.IdIzdspr);
+        cena = zakazServ.SetCena(spr.IdIzdspr);
     }
     IzdelieSpr spr = Conf_Osobenn.selectedIzd;
     double selectedVal; //выбранный размер
-    Izdelie izdel = new ();
-    Zakaz zakaz = new ();
+    Izdelie izdel = new();
+    Zakaz zakaz = new();
+    [CascadingParameter] Task<AuthenticationState> authenticationStateTask { get; set; }
 
 
     private void Price_shet(double selVal)
     {
         this.selectedVal = selVal;
-        izdel.PriceIzd = Math.Round(cena.Koeff * cena.Price_mater * Convert.ToDecimal(selectedVal), 2); //он выбирает размер и сразу справа появляет цена посчитанныая и возможность нажать на заказ
+        izdel.PriceIzd = Math.Round(cena.Koeff.Value * cena.PriceMater.Value * Convert.ToDecimal(selectedVal), 2); //он выбирает размер и сразу справа появляет цена посчитанныая и возможность нажать на заказ
 
     }
-    private void SetIzdelie()
+    private async void SetIzdelie()
     {
         izdel.IdIzdspr = spr.IdIzdspr;
         izdel.DateShtampa = null;
         izdel.IdProb = 1;
         izdel.Razmer = selectedVal;
-        izdel.PriceIzd = Math.Round(cena.Koeff * cena.Price_mater * Convert.ToDecimal(selectedVal), 2);
-        Service.InsertIzdelie(izdel);
-        zakaz.IdClient = auState.User.FindFirst(auState.User.Identity.Name).Value;
+        izdel.PriceIzd = Math.Round(cena.Koeff.Value * cena.PriceMater.Value * Convert.ToDecimal(selectedVal), 2);
+        var idIzd = Service.InsertIzdelie(izdel);
+        var auState = await authenticationStateTask;
+        var User = auState.User;
+        var us = await userManager.GetUserAsync(User);
+        zakaz.IdClient = us.Id;
+        zakaz.IdDost = null;
+        zakaz.DateZak = DateTime.Now;
+        zakaz.IdIzd = idIzd;
+        zakaz.StatusZak = false;
+        zakaz.IdClientNavigation = us;
+        zakazServ.InsertZakaz(zakaz);
+
     }
 }

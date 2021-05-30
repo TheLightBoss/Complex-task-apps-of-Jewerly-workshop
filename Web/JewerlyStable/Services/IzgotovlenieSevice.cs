@@ -8,17 +8,16 @@ namespace Jewerly.Services
 {
     public class IzgotovlenieSevice
     {
-        protected jewerlyContext dB;
+        protected jewerly_newContext dB = new();
         public IzgotovlenieSevice()
         {
         }
-        
+
         public List<Izgotovlenie> GetIzgotovlenies()
         {
-            using (dB = new jewerlyContext())
-            {
-                return dB.Izgotovlenies.ToList();
-            }
+
+            return dB.Izgotovlenies.ToList();
+
         }
     }
 }

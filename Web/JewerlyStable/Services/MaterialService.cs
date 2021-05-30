@@ -8,7 +8,7 @@ namespace Jewerly.Services
 {
     public class MaterialService
     {
-        protected jewerlyContext dB;
+        protected jewerly_newContext dB = new();
         public MaterialService()
         {
             
@@ -16,10 +16,7 @@ namespace Jewerly.Services
 
         public List<Material> GetMaterials()
         {
-            using(dB = new jewerlyContext())
-            {
                 return dB.Materials.ToList();
-            }
             
         }
     }

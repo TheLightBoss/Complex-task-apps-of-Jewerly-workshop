@@ -3,14 +3,13 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace Jewerly
+namespace JewerlyStable
 {
     public partial class Client
     {
         public Client()
         {
             Comments = new HashSet<Comment>();
-            Zakazs = new HashSet<Zakaz>();
         }
 
         public int IdClient { get; set; }
@@ -23,6 +22,5 @@ namespace Jewerly
         public string ContactFace { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
-        public virtual ICollection<Zakaz> Zakazs { get; set; }
     }
 }

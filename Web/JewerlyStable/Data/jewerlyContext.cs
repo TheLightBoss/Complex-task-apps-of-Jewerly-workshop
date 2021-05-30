@@ -478,11 +478,11 @@ namespace JewerlyStable
 
                 entity.Property(e => e.StatusZak).HasColumnName("status_zak");
 
-                entity.HasOne(d => d.IdClientNavigation)
-                    .WithMany(p => p.Zakazs)
-                    .HasForeignKey(d => d.IdClient)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("zakaz_id_client_fkey");
+                //entity.HasOne(d => d.IdClientNavigation)
+                //    .WithMany(p => p.Zakazs)
+                //    .HasForeignKey(d => d.IdClient)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("zakaz_id_client_fkey");
 
                 entity.HasOne(d => d.IdDostNavigation)
                     .WithMany(p => p.Zakazs)

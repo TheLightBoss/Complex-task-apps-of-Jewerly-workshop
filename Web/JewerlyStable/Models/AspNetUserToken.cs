@@ -1,17 +1,16 @@
-﻿using System;
+﻿using JewerlyStable.Data;
+using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
 
 #nullable disable
 
-namespace Jewerly
+namespace JewerlyStable
 {
-    public partial class AspNetUserToken
+    public partial class AspNetUserToken : IdentityUserToken<string>
     {
-        public int UserId { get; set; }
-        public string LoginProvider { get; set; }
-        public string Name { get; set; }
-        public string Value { get; set; }
 
-        public virtual AspNetUser User { get; set; }
+
+        public virtual User User { get; set; }
     }
 }

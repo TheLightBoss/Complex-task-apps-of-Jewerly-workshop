@@ -8,26 +8,24 @@ namespace Jewerly.Services
 {
     public class IzdelieService
     {
-        protected jewerlyContext dB;
+        protected jewerly_newContext dB = new();
         public IzdelieService()
         { }
 
         public List<Izdelie> GetIzdelies()
         {
-            using (dB = new jewerlyContext())
-            {
-                return dB.Izdelies.ToList();
-            }
+            return dB.Izdelies.ToList();
+
         }
 
-        public bool InsertIzdelie(Izdelie izdelie)
+        public int InsertIzdelie(Izdelie izdelie)
         {
-            using (dB = new jewerlyContext())
-            {
-                dB.Izdelies.Add(izdelie);
-                dB.SaveChanges();
-                return true;
-            }
+            var track = dB.Izdelies.Add(izdelie);
+            var idIzd = track.Entity.IdIzd;
+            var idIzd1 = izdelie.IdIzd;
+            dB.SaveChanges();
+            return idIzd1;
+
         }
     }
 }

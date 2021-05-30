@@ -9,17 +9,16 @@ namespace Jewerly.Services
 {
     public class IzdelieSprService
     {
-        protected jewerlyContext dB;
+        protected jewerly_newContext dB = new();
         public IzdelieSprService()
         {
         }
         //GetIzdelie_spr
         public List<IzdelieSpr> GetIzdelieSprs()
         {
-            using(dB = new jewerlyContext())
-            {
-                return dB.IzdelieSprs.ToList();
-            }
+
+            return dB.IzdelieSprs.ToList();
+
         }
     }
 }

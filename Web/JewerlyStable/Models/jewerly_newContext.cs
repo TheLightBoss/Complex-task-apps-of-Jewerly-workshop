@@ -1,4 +1,6 @@
 ﻿using System;
+using JewerlyStable.Data;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -18,13 +20,6 @@ namespace JewerlyStable
         }
 
         public virtual DbSet<Answer> Answers { get; set; }
-        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
-        public virtual DbSet<AspNetRoleClaim> AspNetRoleClaims { get; set; }
-        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
-        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
-        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetUserRole> AspNetUserRoles { get; set; }
-        public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; }
         public virtual DbSet<Bank> Banks { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
@@ -40,6 +35,10 @@ namespace JewerlyStable
         public virtual DbSet<Sotrudnik> Sotrudniks { get; set; }
         public virtual DbSet<TipIzd> TipIzds { get; set; }
         public virtual DbSet<Zakaz> Zakazs { get; set; }
+        public virtual DbSet<Zakazsgotov> Zakazsgotovs { get; set; }
+        public virtual DbSet<Zakazsinproc> Zakazsinprocs { get; set; }
+        public virtual DbSet<Zakazsmaster> Zakazsmasters { get; set; }
+        public virtual DbSet<Zakazsnew> Zakazsnews { get; set; }
         public virtual DbSet<Zakupka> Zakupkas { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -54,7 +53,7 @@ namespace JewerlyStable
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Russian_Russia.1251@icu");
-
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Answer>(entity =>
             {
                 entity.HasKey(e => e.IdAns)
@@ -113,23 +112,6 @@ namespace JewerlyStable
             //        .HasForeignKey(d => d.RoleId);
             //});
 
-            //modelBuilder.Entity<AspNetUser>(entity =>
-            //{
-            //    entity.HasIndex(e => e.NormalizedEmail, "EmailIndex");
-
-            //    entity.HasIndex(e => e.NormalizedUserName, "UserNameIndex")
-            //        .IsUnique();
-
-            //    entity.Property(e => e.Email).HasMaxLength(256);
-
-            //    entity.Property(e => e.LockoutEnd).HasColumnType("timestamp with time zone");
-
-            //    entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
-
-            //    entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
-
-            //    entity.Property(e => e.UserName).HasMaxLength(256);
-            //});
 
             //modelBuilder.Entity<AspNetUserClaim>(entity =>
             //{
@@ -587,11 +569,11 @@ namespace JewerlyStable
 
                 entity.Property(e => e.StatusZak).HasColumnName("status_zak");
 
-                entity.HasOne(d => d.IdClientNavigation)
-                    .WithMany(p => p.Zakazs)
-                    .HasForeignKey(d => d.IdClient)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("zakaz_id_client_fkey");
+                //entity.HasOne(d => d.IdClientNavigation)
+                //    .WithMany(p => p.Zakazs)
+                //    .HasForeignKey(d => d.IdClient)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("zakaz_id_client_fkey");
 
                 entity.HasOne(d => d.IdDostNavigation)
                     .WithMany(p => p.Zakazs)
@@ -603,6 +585,96 @@ namespace JewerlyStable
                     .HasForeignKey(d => d.IdIzd)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("zakaz_id_izd_fkey");
+            });
+
+            modelBuilder.Entity<Zakazsgotov>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("zakazsgotov");
+
+                entity.Property(e => e.DateZak)
+                    .HasColumnType("date")
+                    .HasColumnName("date_zak");
+
+                entity.Property(e => e.IdIzd).HasColumnName("id_izd");
+
+                entity.Property(e => e.NameIzd).HasColumnName("name_izd");
+
+                entity.Property(e => e.PoluStatus).HasColumnName("polu_status");
+
+                entity.Property(e => e.PriceIzd).HasColumnName("price_izd");
+
+                entity.Property(e => e.UserName).HasMaxLength(256);
+            });
+
+            modelBuilder.Entity<Zakazsinproc>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("zakazsinproc");
+
+                entity.Property(e => e.DateZak)
+                    .HasColumnType("date")
+                    .HasColumnName("date_zak");
+
+                entity.Property(e => e.IdIzd).HasColumnName("id_izd");
+
+                entity.Property(e => e.NameIzd).HasColumnName("name_izd");
+
+                entity.Property(e => e.PoluStatus).HasColumnName("polu_status");
+
+                entity.Property(e => e.PriceIzd).HasColumnName("price_izd");
+
+                entity.Property(e => e.UserName).HasMaxLength(256);
+            });
+
+            modelBuilder.Entity<Zakazsmaster>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("zakazsmasters");
+
+                entity.Property(e => e.DataStart)
+                    .HasColumnType("date")
+                    .HasColumnName("data_start");
+
+                entity.Property(e => e.IdIzd).HasColumnName("id_izd");
+
+                entity.Property(e => e.IdSotr).HasColumnName("id_sotr");
+
+                entity.Property(e => e.ListDoneJob).HasColumnName("list_done_job");
+
+                entity.Property(e => e.NameIzd).HasColumnName("name_izd");
+
+                entity.Property(e => e.PoluStatus).HasColumnName("polu_status");
+
+                entity.Property(e => e.Razmer).HasColumnName("razmer");
+
+                entity.Property(e => e.SpisokRabot).HasColumnName("spisok_rabot");
+
+                entity.Property(e => e.Status).HasColumnName("status");
+
+                entity.Property(e => e.UrlPic).HasColumnName("url_pic");
+            });
+
+            modelBuilder.Entity<Zakazsnew>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("zakazsnew");
+
+                entity.Property(e => e.DateZak)
+                    .HasColumnType("date")
+                    .HasColumnName("date_zak");
+
+                entity.Property(e => e.IdIzd).HasColumnName("id_izd");
+
+                entity.Property(e => e.NameIzd).HasColumnName("name_izd");
+
+                entity.Property(e => e.PriceIzd).HasColumnName("price_izd");
+
+                entity.Property(e => e.UserName).HasMaxLength(256);
             });
 
             modelBuilder.Entity<Zakupka>(entity =>

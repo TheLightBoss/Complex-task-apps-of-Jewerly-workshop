@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace Jewerly
+namespace JewerlyStable
 {
     public partial class Material
     {
