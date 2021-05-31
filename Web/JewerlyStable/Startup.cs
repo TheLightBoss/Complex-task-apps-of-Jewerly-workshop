@@ -38,11 +38,10 @@ namespace JewerlyStable
             services.AddDbContext<jewerly_newContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Myconnection")));
             services.AddIdentity<User, IdentityRole>(opts =>
             {
-                opts.SignIn.RequireConfirmedAccount = false;
-                opts.Password.RequireNonAlphanumeric = false;
-                opts.Password.RequireLowercase = false;
-                opts.Password.RequireUppercase = false;
-                opts.Password.RequireDigit = false;
+                //opts.Password.RequireNonAlphanumeric = false;
+                //opts.Password.RequireLowercase = false;
+                //opts.Password.RequireUppercase = false;
+                //opts.Password.RequireDigit = false;
             }
             )
                 .AddEntityFrameworkStores<ApplicationDbContext>()

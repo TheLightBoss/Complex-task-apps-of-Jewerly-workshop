@@ -601,6 +601,8 @@ namespace JewerlyStable
 
                 entity.Property(e => e.PriceIzd).HasColumnName("price_izd");
 
+                entity.Property(e => e.IdClient).HasColumnName("id_client");
+
                 entity.Property(e => e.Razmer).HasColumnName("razmer");
 
                 entity.Property(e => e.StatusZak).HasColumnName("status_zak");

@@ -40,9 +40,9 @@ namespace Jewerly.Services
             };
             return result;
         }
-        public List<ZakazForClient> GetZakazForClient()
+        public IEnumerable<ZakazForClient> GetZakazForClient(string id_user)
         {
-            return DB.ZakazForClients.ToList();
+            return DB.ZakazForClients.ToList().Where(c => c.IdClient == id_user);
         }
     }
 }
