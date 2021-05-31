@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using Npgsql;
 using MudBlazor.Services;
 using Jewerly.Services;
+using MudBlazor;
 
 namespace JewerlyStable
 {
@@ -38,10 +39,10 @@ namespace JewerlyStable
             services.AddDbContext<jewerly_newContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Myconnection")));
             services.AddIdentity<User, IdentityRole>(opts =>
             {
-                //opts.Password.RequireNonAlphanumeric = false;
-                //opts.Password.RequireLowercase = false;
-                //opts.Password.RequireUppercase = false;
-                //opts.Password.RequireDigit = false;
+                opts.Password.RequireNonAlphanumeric = false;
+                opts.Password.RequireLowercase = false;
+                opts.Password.RequireUppercase = false;
+                opts.Password.RequireDigit = false;
             }
             )
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -56,7 +57,12 @@ namespace JewerlyStable
             services.AddSingleton<IzdelieService>();
             services.AddSingleton<MaterialService>();
             services.AddSingleton<ZakazService>();
-            services.AddMudServices();
+            services.AddMudServices(config =>
+            {
+                config.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.TopCenter;
+                config.SnackbarConfiguration.HideTransitionDuration = 500;
+                config.SnackbarConfiguration.ShowTransitionDuration = 500;
+            });
             services.AddAuthentication()
                 .AddGoogle(options =>
                 {

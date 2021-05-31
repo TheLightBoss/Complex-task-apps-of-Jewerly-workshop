@@ -43,9 +43,8 @@ namespace JewerlyStable.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
-            public string Email { get; set; }
+            [Required]           
+            public string Username { get; set; }
 
             [Required]
             [DataType(DataType.Password)]
@@ -81,14 +80,12 @@ namespace JewerlyStable.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var user = await _userManager.FindByEmailAsync(Input.Email);
-                var result = await _signInManager.CheckPasswordSignInAsync(user, Input.Password, lockoutOnFailure: false);
+                // To enable password failures to trigger account lockout, set lockoutOnFailure: true               
+                //var result = await _signInManager.CheckPasswordSignInAsync(user, Input.Password, lockoutOnFailure: false);
                 //await _signInManager.SignInAsync(user, isPersistent: false);
-                //var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(Input.Username, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }

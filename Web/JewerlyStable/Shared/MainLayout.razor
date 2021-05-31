@@ -1,5 +1,6 @@
 ﻿@inherits LayoutComponentBase
 @inject NavigationManager NavMan
+@inject ISnackbar Snackbar
 
 
 <MudAppBar Color="Color.Primary" Fixed="false">
@@ -14,7 +15,7 @@
 
     <MudLink></MudLink>
     <MudAppBarSpacer />
-    <MudLink Color="Color.Dark" Href="configurator_page"><MudIcon Icon="@Icons.Material.Filled.DesignServices"></MudIcon>Собрать изделие</MudLink>
+    <MudButton Class="mx-2" OnClick="NavigateConf" Color="Color.Dark" Variant="Variant.Text" StartIcon="@Icons.Material.Filled.DesignServices">Личный кабинет</MudButton>
     <MudAppBarSpacer />
     <AuthorizeView>
         <Authorized>
@@ -28,7 +29,7 @@
         <Authorized>
             <MudText Class="mx-2">@context.User.Identity.Name!</MudText>
             <MudLink Class=""></MudLink>
-            <MudButton Class="mx-2" OnClick="Navigate" Color="Color.Dark"Variant="Variant.Text">Личный кабинет</MudButton>
+            <MudButton Class="mx-2" OnClick="Navigate" Color="Color.Dark" Variant="Variant.Text">Личный кабинет</MudButton>
             <form method="post" action="Identity/Account/LogOut">
                 <MudButton Class="mx-2" ButtonType="ButtonType.Submit" Variant="Variant.Text" Color="Color.Dark">Выйти</MudButton>
             </form>
@@ -86,7 +87,16 @@
 
 
 
-@code{
+@code
+{ 
+    [CascadingParameter] Task<AuthenticationState> authenticationStateTask { get; set; }
+    bool isAuthenticated;
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await authenticationStateTask;
+        var user = authState.User;
+        isAuthenticated = user.Identity.IsAuthenticated;
+    }
     MudTheme MyCustomTheme = new MudTheme()
     {
         Palette = new Palette()
@@ -110,6 +120,11 @@
     void NavOut()
     {
         NavMan.NavigateTo("/Identity/Account/LogOut");
+    }
+    void NavigateConf()
+    {
+        if (isAuthenticated) NavMan.NavigateTo("/configurator_page");
+        else Snackbar.Add("Вы не авторизованы!", Severity.Error);
     }
 
 
