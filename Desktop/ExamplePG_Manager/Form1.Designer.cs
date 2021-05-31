@@ -138,7 +138,7 @@ namespace ExamplePG_Manager
             this.tabPage_sotrudnik.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage_sotrudnik.Size = new System.Drawing.Size(973, 583);
             this.tabPage_sotrudnik.TabIndex = 3;
-            this.tabPage_sotrudnik.Text = "Сотрдники";
+            this.tabPage_sotrudnik.Text = "Сотрудники";
             this.tabPage_sotrudnik.UseVisualStyleBackColor = true;
             this.tabPage_sotrudnik.Enter += new System.EventHandler(this.tabPage_sotrudnik_Enter);
             // 
@@ -592,30 +592,35 @@ namespace ExamplePG_Manager
             this.Column_Date.FillWeight = 116.9543F;
             this.Column_Date.HeaderText = "Дата";
             this.Column_Date.Name = "Column_Date";
+            this.Column_Date.ReadOnly = true;
             // 
             // Column_Izdel
             // 
             this.Column_Izdel.FillWeight = 116.9543F;
             this.Column_Izdel.HeaderText = "Изделие";
             this.Column_Izdel.Name = "Column_Izdel";
+            this.Column_Izdel.ReadOnly = true;
             // 
             // Column_Client
             // 
             this.Column_Client.FillWeight = 116.9543F;
             this.Column_Client.HeaderText = "Клиент";
             this.Column_Client.Name = "Column_Client";
+            this.Column_Client.ReadOnly = true;
             // 
             // Column_ContactInfo
             // 
             this.Column_ContactInfo.FillWeight = 116.9543F;
             this.Column_ContactInfo.HeaderText = "Контактная инфо.";
             this.Column_ContactInfo.Name = "Column_ContactInfo";
+            this.Column_ContactInfo.ReadOnly = true;
             // 
             // Column_Price
             // 
             this.Column_Price.FillWeight = 116.9543F;
             this.Column_Price.HeaderText = "Цена, P";
             this.Column_Price.Name = "Column_Price";
+            this.Column_Price.ReadOnly = true;
             // 
             // radioButton_readyZakaz
             // 

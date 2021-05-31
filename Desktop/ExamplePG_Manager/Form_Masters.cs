@@ -20,7 +20,7 @@ namespace ExamplePG_Manager
         
         int selected_Index_Master = -1;
         List<Zakazs_Master> zakazs_s = new List<Zakazs_Master>();
-        String url = "https://b3f48d32d3a6.ngrok.io/Home/";
+        String url = "https://c9192a0a689d.ngrok.io/Home/";
         string id_izd;
 
         //создадим переменную в которую получим заказ, который присвоим выбранному мастеру

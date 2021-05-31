@@ -20,7 +20,7 @@ namespace ExamplePG_Manager
     {
         string connectionStr = "Server=localhost; Port=5432; Database=jewerly; User Id=postgres; Password=saak2108;";
         NpgsqlConnection connection;
-        String url = "https://b3f48d32d3a6.ngrok.io/Home/";
+        String url = "https://c9192a0a689d.ngrok.io/Home/";
 
         DataRow[] dataRow; // (работаем через это) 
         DataTable dataTable; // данные таблицы Izdeli_Spr
