@@ -64,27 +64,7 @@
     </MudGrid>
 </MudContainer>
 
-<MudThemeProvider Theme="MyCustomTheme" />
-<MudDialogProvider />
-<MudSnackbarProvider />
-
 @code {
-
-    MudTheme MyCustomTheme = new MudTheme()
-    {
-        Palette = new Palette()
-        {
-            Primary = Colors.Grey.Darken4,
-            //Error = Colors.Blue.Darken1,
-            Dark = Colors.Shades.White,
-        },
-
-        LayoutProperties = new LayoutProperties()
-        {
-            DrawerWidthLeft = "260px",
-            DrawerWidthRight = "300px"
-        }
-    }; //цвета
 
     string colco, cepochka, camen;
     int idMat;

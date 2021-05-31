@@ -1,0 +1,31 @@
+﻿@inject ZakazService ser
+@page "/order"
+<MudTable Items="@zakazs" Hover="true" SortLabel="Sort By" Bordered="true" Striped="true" Class="m-3">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Мои заказы</MudText>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<ZakazForClient, object>(x=>x.DateZak)">Дата заказа</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<ZakazForClient, object>(x=>x.NameIzd)">Наименование</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<ZakazForClient, object>(x=>x.PriceIzd)">Цена</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<ZakazForClient, object>(x=>x.Razmer)">Размер</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<ZakazForClient, object>(x=>x.StatusZak)">Статус заказа</MudTableSortLabel></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Дата заказа">@context.DateZak</MudTd>
+        <MudTd DataLabel="Наименование">@context.NameIzd</MudTd>
+        <MudTd DataLabel="Цена">@context.PriceIzd</MudTd>
+        <MudTd DataLabel="Размер">@context.Razmer</MudTd>
+        <MudTd DataLabel="Статус заказа">@context.StatusZak</MudTd>
+    </RowTemplate>
+</MudTable>
+
+@code
+{
+    IEnumerable<ZakazForClient> zakazs = new List<ZakazForClient>();
+    protected override void OnInitialized()
+    {
+        zakazs = ser.GetZakazForClient();
+    }
+
+}

@@ -20,9 +20,25 @@ namespace JewerlyStable
         public bool StatusZak { get; set; }
         public string IdClient { get; set; }
 
-        public virtual User IdClientNavigation { get; set; }
         public virtual Dostavka IdDostNavigation { get; set; }
         public virtual Izdelie IdIzdNavigation { get; set; }
 
     }
 }
+
+
+//    public partial class Zakaz
+//    {
+//        public int IdZak { get; set; }
+//        public DateTime DateZak { get; set; }
+//        public int IdIzd { get; set; }
+//        public int? IdDost { get; set; }
+//        public bool StatusZak { get; set; }
+//        public string IdClient { get; set; }
+
+//        public virtual AspNetUser IdClientNavigation { get; set; }
+//        public virtual Dostavka IdDostNavigation { get; set; }
+//        public virtual Izdelie IdIzdNavigation { get; set; }
+//    }
+
+

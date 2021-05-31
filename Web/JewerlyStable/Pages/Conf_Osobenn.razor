@@ -66,28 +66,8 @@
     </MudGrid>
 </MudContainer>
 
-<MudThemeProvider Theme="MyCustomTheme" />
-<MudDialogProvider />
-<MudSnackbarProvider />
 
 @code {
-    MudTheme MyCustomTheme = new MudTheme()
-    {
-        Palette = new Palette()
-        {
-            Primary = Colors.Grey.Darken4,
-            //Error = Colors.Blue.Darken1,
-            Dark = Colors.Shades.White,
-        },
-
-        LayoutProperties = new LayoutProperties()
-        {
-            DrawerWidthLeft = "260px",
-            DrawerWidthRight = "300px"
-        }
-    }; //цвета
-
-
     string spec1, spec2, spec3, nameTip;
     public IList<IzdelieSpr> izdelies = Conf_tipizd.izdelies;
     public IList<IzdelieSpr> need = new List<IzdelieSpr>();

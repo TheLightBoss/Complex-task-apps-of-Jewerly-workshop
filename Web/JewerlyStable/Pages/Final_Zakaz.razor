@@ -2,6 +2,8 @@
 @inject IzdelieService Service
 @inject ZakazService zakazServ
 @inject UserManager<User> userManager
+@inject IDialogService DialogService
+@inject NavigationManager NavMan
 
 
 
@@ -34,7 +36,7 @@
                     <MudText Typo="Typo.overline">Примерная стоимость кольца: @izdel.PriceIzd руб</MudText>
                 </MudCardContent>
                 <MudCardActions Class="d-flex justify-center">
-                    <MudButton @onclick="SetIzdelie" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;">Заказать</MudButton>
+                    <MudButton @onclick="SetIzdelie" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;" Disabled="@butt">Заказать</MudButton>
                 </MudCardActions>
             </MudCard>
         </MudItem>
@@ -47,27 +49,8 @@
 </MudContainer>
 
 
-<MudThemeProvider Theme="MyCustomTheme" />
-<MudDialogProvider />
-<MudSnackbarProvider />
-
 @code {
-
-    MudTheme MyCustomTheme = new MudTheme()
-    {
-        Palette = new Palette()
-        {
-            Primary = Colors.Grey.Darken4,
-            //Error = Colors.Blue.Darken1,
-            Dark = Colors.Shades.White,
-        },
-
-        LayoutProperties = new LayoutProperties()
-        {
-            DrawerWidthLeft = "260px",
-            DrawerWidthRight = "300px"
-        }
-    }; //цвета
+    bool butt = true;
     SetCena cena = new();
     protected override void OnInitialized()
     {
@@ -83,6 +66,7 @@
     private void Price_shet(double selVal)
     {
         this.selectedVal = selVal;
+        butt = false;
         izdel.PriceIzd = Math.Round(cena.Koeff.Value * cena.PriceMater.Value * Convert.ToDecimal(selectedVal), 2); //он выбирает размер и сразу справа появляет цена посчитанныая и возможность нажать на заказ
 
     }
@@ -98,12 +82,16 @@
         var User = auState.User;
         var us = await userManager.GetUserAsync(User);
         zakaz.IdClient = us.Id;
-        zakaz.IdDost = null;
         zakaz.DateZak = DateTime.Now;
         zakaz.IdIzd = izdel.IdIzd;
         zakaz.StatusZak = false;
-        //zakaz.IdClient
         zakazServ.InsertZakaz(zakaz);
+        var dialog = await DialogService.Show<Success>("Успешно").Result;
+        if (!dialog.Cancelled)
+        {
+            NavMan.NavigateTo("/order");
+        }
+        else NavMan.NavigateTo("/");
 
     }
 }

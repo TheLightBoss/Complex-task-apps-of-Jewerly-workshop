@@ -15,16 +15,12 @@ namespace Jewerly.Services
         public List<Izdelie> GetIzdelies()
         {
             return dB.Izdelies.ToList();
-
         }
 
         public void InsertIzdelie(Izdelie izdelie)
         {
-            var track = dB.Izdelies.Add(izdelie);
-            var idIzd = track.Entity.IdIzd;
+            dB.Izdelies.Add(izdelie);
             dB.SaveChanges();
-            //return izdelie.IdIzd;
-
         }
     }
 }

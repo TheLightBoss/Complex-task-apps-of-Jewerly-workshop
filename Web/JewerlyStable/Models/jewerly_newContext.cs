@@ -24,6 +24,7 @@ namespace JewerlyStable
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Dostavka> Dostavkas { get; set; }
+        public virtual DbSet<ZakazForClient> ZakazForClients { get; set; }
         public virtual DbSet<Izdelie> Izdelies { get; set; }
         public virtual DbSet<IzdelieSpr> IzdelieSprs { get; set; }
         public virtual DbSet<Izgotovlenie> Izgotovlenies { get; set; }
@@ -585,6 +586,24 @@ namespace JewerlyStable
                     .HasForeignKey(d => d.IdIzd)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("zakaz_id_izd_fkey");
+            });
+            modelBuilder.Entity<ZakazForClient>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("zakaz_for_client");
+
+                entity.Property(e => e.DateZak)
+                    .HasColumnType("date")
+                    .HasColumnName("date_zak");
+
+                entity.Property(e => e.NameIzd).HasColumnName("name_izd");
+
+                entity.Property(e => e.PriceIzd).HasColumnName("price_izd");
+
+                entity.Property(e => e.Razmer).HasColumnName("razmer");
+
+                entity.Property(e => e.StatusZak).HasColumnName("status_zak");
             });
 
             modelBuilder.Entity<Zakazsgotov>(entity =>

@@ -1,6 +1,7 @@
 ﻿@page "/configurator_page"
 @inject MaterialService Service
 @inject NavigationManager NavigationManager
+@attribute [Authorize]
 
 
 <MudContainer Class="mt-16">
@@ -80,28 +81,9 @@
 
     </MudGrid>
 </MudContainer>
-<p> @h </p>
 
-<MudThemeProvider Theme="MyCustomTheme" />
-<MudDialogProvider />
-<MudSnackbarProvider />
-
-@code {
-    MudTheme MyCustomTheme = new MudTheme()
-    {
-        Palette = new Palette()
-        {
-            Primary = Colors.Grey.Darken4,
-            //Error = Colors.Blue.Darken1,
-            Dark = Colors.Shades.White,
-        },
-
-        LayoutProperties = new LayoutProperties()
-        {
-            DrawerWidthLeft = "260px",
-            DrawerWidthRight = "300px"
-        }
-    }; //цвета
+@code
+{
 
     public IList<Material> mats;
     string gold, rose, serebro;
@@ -109,6 +91,7 @@
     string h = "";
     protected override void OnInitialized()
     {
+
         //string connectionStr = "Server=localhost; Port=5432; Database=jewerly; User Id=postgres; Password=saak2108;";
         //NpgsqlConnection connection = new NpgsqlConnection(connectionStr);
         //try
