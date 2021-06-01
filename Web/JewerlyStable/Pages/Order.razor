@@ -1,28 +1,37 @@
-﻿@inject ZakazService ser
+﻿@page "/Order"
+@inject ZakazService ser
 @inject UserManager<User> userManager
-@page "/order"
 
-
+@if (zakazs.Count() == 0)
+{
+    <MudAlert Elevation="5" Severity="Severity.Info" Variant="Variant.Filled" Class="my-5"><MudText Typo="Typo.h5" Align="Align.Center" >У вас нет заказов. Перейдите на конфигуратор изделий для формирования заказа.</MudText></MudAlert>
+}
+else
+{
 <MudTable Items="@zakazs" Hover="true" SortLabel="Sort By" Bordered="true" Striped="true" Class="m-3">
     <ToolBarContent>
         <MudText Typo="Typo.h6">Мои заказы</MudText>
     </ToolBarContent>
     <HeaderContent>
-        <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<ZakazForClient, object>(x=>x.DateZak)">Дата заказа</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel SortBy="new Func<ZakazForClient, object>(x=>x.NameIzd)">Наименование</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel SortBy="new Func<ZakazForClient, object>(x=>x.PriceIzd)">Цена</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel SortBy="new Func<ZakazForClient, object>(x=>x.Razmer)">Размер</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel SortBy="new Func<ZakazForClient, object>(x=>x.StatusZak)">Статус заказа</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<ZakazForClient, object>(x => x.DateZak)">Дата заказа</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<ZakazForClient, object>(x => x.NameIzd)">Наименование</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<ZakazForClient, object>(x => x.PriceIzd)">Цена</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<ZakazForClient, object>(x => x.Razmer)">Размер</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<ZakazForClient, object>(x => x.StatusZak)">Статус заказа</MudTableSortLabel></MudTh>
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="Дата заказа">@context.DateZak</MudTd>
         <MudTd DataLabel="Наименование">@context.NameIzd</MudTd>
         <MudTd DataLabel="Цена">@context.PriceIzd</MudTd>
         <MudTd DataLabel="Размер">@context.Razmer</MudTd>
-        <MudTd DataLabel="Статус заказа">@context.StatusZak</MudTd>
+        @if (context.StatusZak.Value){ <MudTd DataLabel="Статус заказа">Готово</MudTd>}
+        else{<MudTd DataLabel="Статус заказа">Не готово</MudTd>}
+
+
+
     </RowTemplate>
 </MudTable>
-
+}
 
 
 @code

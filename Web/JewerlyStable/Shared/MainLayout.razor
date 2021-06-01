@@ -15,28 +15,27 @@
 
     <MudLink></MudLink>
     <MudAppBarSpacer />
-    <MudButton Class="mx-2" OnClick="NavigateConf" Color="Color.Dark" Variant="Variant.Text" StartIcon="@Icons.Material.Filled.DesignServices">Личный кабинет</MudButton>
+    <MudButton Class="mx-2" OnClick="NavigateConf" Color="Color.Dark" Variant="Variant.Text" StartIcon="@Icons.Material.Filled.DesignServices">Конфигуратор изделий</MudButton>
     <MudAppBarSpacer />
     <AuthorizeView>
         <Authorized>
-            <MudLink Color="Color.Dark" Href="order"><MudIcon Icon="@Icons.Material.Filled.Storage"></MudIcon>Мои заказы</MudLink>
+            <MudButton Class="mx-1" OnClick="@(()=> NavMan.NavigateTo("/order"))" Color="Color.Dark" Variant="Variant.Text" StartIcon="@Icons.Material.Filled.FormatListBulleted">Заказы</MudButton>
             <MudAppBarSpacer />
         </Authorized>
     </AuthorizeView>
-    <MudLink Color="Color.Dark" Href="https://docs.microsoft.com/aspnet/"><MudIcon Icon="@Icons.Material.Filled.Info"></MudIcon>О компании</MudLink>
+    <MudButton Class="mx-1" Color="Color.Dark" Variant="Variant.Text" StartIcon="@Icons.Material.Filled.Info">О компании</MudButton>
     <MudAppBarSpacer />
     <AuthorizeView>
         <Authorized>
-            <MudText Class="mx-2">@context.User.Identity.Name!</MudText>
-            <MudLink Class=""></MudLink>
+            <MudText Class="mx-2">Здраствуйте, @context.User.Identity.Name!</MudText>
             <MudButton Class="mx-2" OnClick="Navigate" Color="Color.Dark" Variant="Variant.Text">Личный кабинет</MudButton>
             <form method="post" action="Identity/Account/LogOut">
                 <MudButton Class="mx-2" ButtonType="ButtonType.Submit" Variant="Variant.Text" Color="Color.Dark">Выйти</MudButton>
             </form>
         </Authorized>
         <NotAuthorized>
-            <MudLink Color="Color.Dark" Href="Identity/Account/Login" Class="mx-1"><MudIcon Icon="@Icons.Material.Filled.Login"></MudIcon>Авторизация</MudLink>
-            <MudLink Color="Color.Dark" Href="Identity/Account/Register" Class="mx-1"><MudIcon Icon="@Icons.Material.Filled.HowToReg"></MudIcon>Регистрация</MudLink>
+            <MudButton Class="mx-1" OnClick="@(()=> NavMan.NavigateTo("/Identity/Account/Login", true))" Color="Color.Dark" Variant="Variant.Text" StartIcon="@Icons.Material.Filled.Login">Личный кабинет</MudButton>
+            <MudButton Class="mx-1" OnClick="@(()=> NavMan.NavigateTo("/Identity/Account/Register", true))" Color="Color.Dark" Variant="Variant.Text" StartIcon="@Icons.Material.Filled.HowToReg">Регистрация</MudButton>
         </NotAuthorized>
     </AuthorizeView>
     <MudAppBarSpacer />
@@ -69,12 +68,12 @@
                 </ul>
             </div>
             <div class="col-md-6 item text">
-                <h3>Ювелирка</h3>
+                
                 <p>Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac sem lacus. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.</p>
             </div>
             <div class="col item social"><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a></div>
         </div>
-        <p class="copyright">Company Name © 2021</p>
+        <p class="copyright">Jewerly Workshop © 2021</p>
     </div>
 </footer>
 

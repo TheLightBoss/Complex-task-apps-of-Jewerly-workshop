@@ -1,8 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>aspnet-JewerlyStable-BF3065E1-BCC1-4B12-A8D0-FC76FB49AEC5</UserSecretsId>
+    <AssemblyName>JewerlyStable</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

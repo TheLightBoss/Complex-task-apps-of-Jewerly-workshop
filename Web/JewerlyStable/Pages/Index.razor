@@ -1,7 +1,31 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
+<MudContainer Style="margin-top: 20px; text-align: center">
+    <MudGrid Justify="Justify.Center">
+        <MudItem>
+            <img width="250px" height="250px" src="https://psv4.userapi.com/c532036/u136274131/docs/d5/92ad3ebdfa04/images.png?extra=PylrNHWEQ9v1AQ3J6BesjzoY26OK_Lo3meSFDoHG64QafsjmYsPqQs2jOqvJCR6x1qaAecumw6QI-nsPZQHtkUCaUAz9K3oOu158C93LaflDUzqleRYoOd-URTmWNjx6Cigv12MK-ivMJ-T7ShxEayQJ8A" />
+            <MudText Align="Align.Center" Typo="Typo.h4">Индивидуальные ювелирные изделия</MudText>
+        </MudItem>
+        <MudItem>
+            <MudCarousel ShowArrows="true" Style="height:400px; width:650px" AutoCycle="true" TData="object" ShowDelimiters="false">
+                <MudCarouselItem>
+                    <div class="d-flex" style="height:100%">
+                        <img width="650px" src="https://silvers.in.ua/image/catalog/novosti/2019/tarven/kakvybratjuvelirnyeizdelijavmagazine(4).jpg" />
+                    </div>
+                </MudCarouselItem>
+                <MudCarouselItem>
+                    <div class="d-flex" style="height:100%">
+                        <img src="https://new-retail.ru/upload/iblock/035/x035590d39f611327a72f9c885cdd62d1.jpg.pagespeed.ic.F3jhDA-fTS.jpg"
+                    </div>
+                </MudCarouselItem>
+                <MudCarouselItem>
+                    <div class="d-flex" style="height:100%">
+                        <img width="650px" src="https://rubic.us/wp-content/uploads/2017/01/3581085_large-e1484674406228-1024x552.jpg" />
+                    </div>
+                </MudCarouselItem>
+            </MudCarousel>
+        </MudItem>
 
-Welcome to your new app.
+    </MudGrid>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+</MudContainer>
